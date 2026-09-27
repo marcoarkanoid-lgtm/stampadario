@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informativa sulla Privacy & Normativa GDPR - Calendario Maker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-page: #f8fafc;
+      --card-bg: #ffffff;
+      --accent-orange: #ea580c;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .privacy-container {
+      width: 100%;
+      max-width: 780px;
+      background: var(--card-bg);
+      padding: 42px 48px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-color);
+    }
+
+    .privacy-header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .badge-gdpr {
+      display: inline-block;
+      padding: 4px 10px;
+      background: #ecfdf5;
+      color: #059669;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .last-update {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 28px 0 12px 0;
+    }
+
+    p {
+      margin-bottom: 14px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 18px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    .highlight-card {
+      background: #fff7ed;
+      border-left: 4px solid var(--accent-orange);
+      padding: 16px 20px;
+      border-radius: 0 10px 10px 0;
+      margin: 20px 0;
+    }
+
+    .highlight-card p {
+      color: #9a3412;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 36px;
+      padding: 12px 22px;
+      background: var(--accent-orange);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 9px;
+      transition: background 0.15s ease;
+    }
+
+    .btn-back:hover {
+      background: #c2410c;
+    }
+
+    @media (max-width: 600px) {
+      .privacy-container {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="privacy-container">
+    <header class="privacy-header">
+      <span class="badge-gdpr">✓ Conforme al Regolamento UE 2016/679 (GDPR)</span>
+      <h1>Informativa sulla Privacy & Protezione Dati</h1>
+      <p class="last-update">Ultimo aggiornamento: Settembre 2026</p>
+    </header>
+
+    <div class="highlight-card">
+      <p>🛡️ <strong>In sintesi:</strong> Questa web app opera al 100% in modalità client-side (sul tuo browser). Nessun dato inserito (nomi, note, festività o configurazioni) viene mai trasmesso, raccolto o memorizzato su server remoti.</p>
+    </div>
+
+    <h2>1. Titolare del Trattamento e Filosofia Privacy by Design</h2>
+    <p>L'applicazione <strong>Calendario Maker</strong> è stata progettata seguendo rigorosamente il principio della <em>Privacy by Design</em> e della <em>Minimizzazione dei Dati</em> (Art. 5 GDPR). L'applicazione funziona interamente all'interno della memoria locale del browser web dell'utente.</p>
+
+    <h2>2. Dati Trattati e Finalità</h2>
+    <p>Gli unici dati gestiti dall'applicazione sono quelli inseriti direttamente da te per la compilazione dei fogli:</p>
+    <ul>
+      <li>Titolo o nome del calendario personalizzato;</li>
+      <li>Denominazioni e colori assegnati alle colonne di pianificazione;</li>
+      <li>Date e descrizioni di eventuali festività locali personalizzate;</li>
+      <li>Preferenze grafiche (formato carta A4/A3, orientamento, font e modalità cromatica).</li>
+    </ul>
+    <p>Questi dati servono unicamente a renderizzare a schermo l'anteprima e a consentire la stampa cartacea o l'esportazione in formato PDF.</p>
+
+    <h2>3. Assenza di Cookie di Profilazione o Tracciamento Terze Parti</h2>
+    <p>Questa applicazione <strong>NON utilizza cookie di profilazione</strong>, né cookie pubblicitari, né tracker di analisi di terze parti (come Google Analytics, Facebook Pixel o simili). Non viene effettuato alcun tracciamento del comportamento o delle abitudini dell'utente.</p>
+
+    <h2>4. Utilizzo della Memoria Locale (HTML5 LocalStorage)</h2>
+    <p>Per offrirti la massima comodità d'uso ed evitare che tu debba riconfigurare le colonne ogni volta che riapri la pagina, l'app utilizza il meccanismo standard del <code>localStorage</code> del tuo browser.</p>
+    <ul>
+      <li>I dati rimangono esclusivamente salvati sul tuo dispositivo fisico;</li>
+      <li>Non sono accessibili a terzi né trasferibili attraverso la rete internet;</li>
+      <li>Puoi cancellarli in qualsiasi istante cliccando sul pulsante <strong>"Resetta Tutte le Impostazioni"</strong> presente nella console dell'applicazione, oppure cancellando i dati di navigazione del browser.</li>
+    </ul>
+
+    <h2>5. Diritti dell'Interessato (Artt. 15-22 GDPR)</h2>
+    <p>In conformità al Regolamento Generale sulla Protezione dei Dati (GDPR):</p>
+    <ul>
+      <li><strong>Diritto di Accesso e Portabilità:</strong> Puoi scaricare l'intero set di dati in formato standard JSON tramite la funzione <em>"Esporta Configurazione JSON"</em>;</li>
+      <li><strong>Diritto all'Oblio (Cancellazione):</strong> Tramite il pulsante di ripristino o la pulizia della cache del browser, tutti i dati memorizzati vengono distrutti istantaneamente e in modo irreversibile dal tuo dispositivo.</li>
+    </ul>
+
+    <h2>6. Tipografia e Risorse Esterne</h2>
+    <p>I font utilizzati appartengono al catalogo open-source di Google Fonts e sono concessi con licenze libere (SIL Open Font License o Apache License). Le richieste per i file dei caratteri avvengono tramite canali sicuri crittografati HTTPS conformi agli standard internazionali di sicurezza.</p>
+
+    <a href="index.html" class="btn-back">← Torna all'Applicazione Calendario</a>
+  </main>
+
+</body>
+</html>

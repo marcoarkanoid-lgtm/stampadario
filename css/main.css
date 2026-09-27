@@ -1,0 +1,148 @@
+/**
+ * ==========================================================================
+ * MAIN.CSS - Design System, Variabili Cromatiche, Reset e Tipografia Globale
+ * ==========================================================================
+ * Tonalità scelte secondo le direttive UX/Pantone/Material:
+ * - Console laterale: schede arancioni calde (Pantone Tangerine / Material Warm Orange)
+ * - Viewport anteprima: tonalità complementare professionale (Material Slate / Deep Navy #1e293b)
+ * - Supporto per desktop, tablet e visualizzazione mobile fluida
+ */
+
+:root {
+  /* Palette Console & Schede (Material Tangerine / Pantone Warm Orange) */
+  --bg-sidebar: #f8fafc;
+  --bg-card-orange: #fff7ed;            /* Sfondo caldo arancione pastello per le schede */
+  --bg-card-orange-hover: #ffedd5;
+  --accent-orange: #ea580c;             /* Pantone Tangerine primario */
+  --accent-orange-hover: #c2410c;
+  --accent-orange-light: #fed7aa;
+  --text-orange-dark: #9a3412;
+
+  /* Palette Viewport Anteprima (Material Slate / Deep Navy #1e293b) */
+  --bg-viewport: #1e293b;               /* Sfondo ardesia scuro complementare per far risaltare il foglio */
+  --bg-viewport-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --sheet-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.45), 0 0 1px 1px rgba(255, 255, 255, 0.08);
+
+  /* Elementi UI comuni */
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-subtle: #e2e8f0;
+  --border-card-subtle: rgba(234, 88, 12, 0.12);
+  --holiday-red: #d32f2f;
+  --holiday-red-light: #fee2e2;
+
+  /* Dimensioni e layout */
+  --sidebar-width: 410px;
+  --radius-card: 14px;
+  --radius-btn: 8px;
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: var(--font-ui);
+  background-color: var(--bg-viewport);
+  color: var(--text-main);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  display: flex;
+  position: relative;
+}
+
+/* Scrollbar personalizzate per la console laterale */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Pulsanti e link di base */
+button {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  outline: none;
+  transition: all 0.18s ease;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  outline: none;
+}
+
+/* Stile per badge ed etichette */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Evidenziazione temporanea delle sezioni quando attivate dall'isola */
+@keyframes sectionPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.4); }
+  50% { transform: scale(1.02); box-shadow: 0 0 0 8px rgba(234, 88, 12, 0.15); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(234, 88, 12, 0); }
+}
+
+.section-highlight {
+  animation: sectionPulse 0.8s ease-in-out 2;
+}
+
+/* Ottimizzazione per dispositivi mobili */
+@media (max-width: 900px) {
+  body {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .control-sidebar {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  .preview-viewport {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    padding: 16px 8px;
+  }
+
+  /* Quando l'utente attiva la visualizzazione anteprima da mobile */
+  body.mobile-preview-active .control-sidebar {
+    display: none;
+  }
+
+  body.mobile-preview-active .preview-viewport {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

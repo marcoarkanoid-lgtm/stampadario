@@ -1,0 +1,352 @@
+/**
+ * ==========================================================================
+ * CALENDAR.CSS - Stili del Foglio, Griglia, Righe, Date e Modalità Cromatiche
+ * ==========================================================================
+ * Specifiche grafiche implementate:
+ * - Rimozione totale del bordo esterno di destra della tabella/calendario
+ * - Prima cella in alto a sinistra completamente priva di bordi e sfondo
+ * - Nessun bordo orizzontale marcato sotto l'intestazione
+ * - Spazio bianco di separazione tra le settimane (dopo la domenica)
+ * - Spazio bianco dopo l'intestazione (solo se le colonne non sono ripetute ogni settimana)
+ * - Festività utente: grassetto marcato (font-weight: 800) sul nome del giorno (nessun asterisco)
+ * - Giorni fuori mese (layout bisettimanale): sfondo grigio tenue (#e2e8f0)
+ * - Supporto per le 3 modalità cromatiche (A Colori, Corpo Grigio, Bianco e Nero)
+ */
+
+/* ==========================================================================
+   VIEWPORT DI ANTEPRIMA (MATERIAL SLATE / DEEP NAVY #1e293b)
+   ========================================================================== */
+.preview-viewport {
+  flex: 1;
+  height: 100vh;
+  overflow: auto;
+  background-color: var(--bg-viewport);
+  background-image: var(--bg-viewport-gradient);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 85px 30px 60px 30px; /* Spazio in alto per l'isola fluttuante fissa */
+}
+
+/* Wrapper scalabile dei fogli di stampa */
+.sheets-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  transform-origin: top center;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   SIMULATORE DEL FOGLIO DI CARTA (A4 / A3)
+   ========================================================================== */
+.print-sheet {
+  background-color: #ffffff;
+  color: #111111;
+  box-shadow: var(--sheet-shadow);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Dimensioni esatte per il simulatore a schermo (rapporto A4 / A3) */
+/* A4 Verticale (210 x 297 mm) */
+.print-sheet.size-a4-portrait {
+  width: 794px;
+  height: 1123px;
+  padding: 24px 22px 20px 22px;
+}
+
+/* A4 Orizzontale (297 x 210 mm) */
+.print-sheet.size-a4-landscape {
+  width: 1123px;
+  height: 794px;
+  padding: 22px 24px 18px 24px;
+}
+
+/* A3 Verticale (297 x 420 mm) */
+.print-sheet.size-a3-portrait {
+  width: 1123px;
+  height: 1587px;
+  padding: 32px 30px 26px 30px;
+}
+
+/* A3 Orizzontale (420 x 297 mm) */
+.print-sheet.size-a3-landscape {
+  width: 1587px;
+  height: 1123px;
+  padding: 28px 32px 24px 32px;
+}
+
+/* ==========================================================================
+   INTESTAZIONE SUPERIORE DEL FOGLIO (SHEET HEADER)
+   ========================================================================== */
+.sheet-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: flex-end;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid currentColor;
+  width: 100%;
+}
+
+.sheet-header-left {
+  grid-column: 1;
+  justify-self: start;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sheet-header-center {
+  grid-column: 2;
+  justify-self: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 12px;
+}
+
+.sheet-header-right {
+  grid-column: 3;
+  justify-self: end;
+  text-align: right;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.sheet-calendar-name {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.sheet-calendar-name:hover {
+  opacity: 0.8;
+}
+
+.sheet-month-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.sheet-header-left .sheet-month-wrap {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.sheet-header-center .sheet-month-wrap {
+  align-items: center;
+  text-align: center;
+}
+
+.sheet-header-right .sheet-month-wrap {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.sheet-month-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: inherit;
+  letter-spacing: -0.3px;
+  line-height: 1.15;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.sheet-month-name:hover {
+  opacity: 0.8;
+}
+
+.sheet-subtitle-badge {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 3px;
+}
+
+/* ==========================================================================
+   GRIGLIA DEL CALENDARIO (CALENDAR GRID)
+   ========================================================================== */
+.calendar-grid-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-left: 1px solid #cbd5e1;
+  border-top: 1px solid #cbd5e1;
+  border-bottom: 1px solid #cbd5e1;
+  border-right: none !important; /* BORDO ESTERNO DI DESTRA RIGOROSAMENTE RIMOSSO */
+  background: #ffffff;
+}
+
+.calendar-grid {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+/* ==========================================================================
+   CELLE DELLA GRIGLIA & REGOLE DI BORDI
+   ========================================================================== */
+.grid-cell {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  border-bottom: 1px solid #cbd5e1;
+  border-right: 1px solid #cbd5e1;
+}
+
+/* --- OPZIONE 2: SOLO TRA COLONNE CONTENUTI (TUTTI E 4 I BORDI ESTERNI SPARISCONO) --- */
+.border-v-columns-only {
+  border: none !important; /* Rimuove i 4 bordi perimetrali esterni del contenitore */
+}
+.border-v-columns-only .grid-cell-date,
+.border-v-columns-only .grid-cell-corner-empty,
+.border-v-columns-only .grid-cell-repeat-header-corner {
+  border-right: none !important; /* Nessun bordo verticale sulla data */
+}
+.border-v-columns-only .grid-cell-col-header,
+.border-v-columns-only .grid-cell-repeat-header-col,
+.border-v-columns-only .grid-cell-data {
+  border-right: 1px solid #cbd5e1; /* Bordo verticale unicamente tra le colonne contenuti */
+}
+.border-v-columns-only .is-last-col-cell {
+  border-right: none !important; /* Nessun bordo perimetrale destro */
+}
+.border-v-columns-only .is-last-row-cell {
+  border-bottom: none !important; /* Nessun bordo perimetrale inferiore */
+}
+
+/* --- OPZIONE 3: NESSUN BORDO VERTICALE (TUTTI E 4 I BORDI ESTERNI SPARISCONO) --- */
+.border-v-none {
+  border: none !important; /* Rimuove i 4 bordi perimetrali esterni del contenitore */
+}
+.border-v-none .grid-cell {
+  border-right: none !important; /* Nessun bordo verticale tra le celle */
+}
+.border-v-none .is-last-row-cell {
+  border-bottom: none !important; /* Nessun bordo perimetrale inferiore */
+}
+
+/* 1. PRIMA CELLA IN ALTO A SINISTRA (ANGOLO DATA): NESSUNA FORMATTAZIONE, BORDI O SFONDO */
+.grid-cell-corner-empty {
+  background: transparent !important;
+  border-bottom: 1px solid #cbd5e1 !important;
+  border-right: 1px solid #cbd5e1 !important;
+}
+
+.grid-cell-repeat-header-corner {
+  background: #f1f5f9;
+  border-bottom: 1px solid #cbd5e1;
+  border-right: 1px solid #cbd5e1;
+}
+
+/* 2. CELLE INTESTAZIONE COLONNE (IN CIMA AL CALENDARIO) */
+.grid-cell-col-header, .grid-cell-repeat-header-col {
+  align-items: center;
+  justify-content: center;
+  padding: 8px 6px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  min-height: 38px;
+}
+
+.col-header-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.2;
+}
+
+/* Spazio bianco di 4.5px sotto l'intestazione se NON ripetute ogni settimana */
+.headers-white-separator .grid-cell-col-header {
+  border-bottom: 4.5px solid #ffffff !important;
+}
+
+/* 3. CELLA DATA (Giorno abbreviato + Numero) */
+.grid-cell-date {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 2px;
+  text-align: center;
+  border-right: 1px solid #cbd5e1;
+}
+
+.date-day-name {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: lowercase; /* MINUSCOLO E COMPATTO COME RICHIESTO */
+  color: #475569;
+  line-height: 1;
+}
+
+.date-day-num {
+  font-size: 1.05rem; /* NUMERO PIÙ GRANDE COME RICHIESTO */
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.1;
+}
+
+/* Sabato, Domenica e Giorni Festivi in Rosso */
+.grid-cell-date.is-holiday .date-day-name,
+.grid-cell-date.is-holiday .date-day-num {
+  color: var(--holiday-red);
+}
+
+/* 4. SEPARATORE BIANCO DOPO LA DOMENICA */
+.grid-cell.is-sunday {
+  border-bottom: 4.5px solid #ffffff !important; /* FASCIA BIANCA DI SEPARAZIONE */
+}
+
+/* 6. CELLE CONTENUTI */
+.grid-cell-data {
+  background-color: #ffffff;
+}
+
+/* ==========================================================================
+   MODALITÀ CROMATICHE (A COLORI, CORPO GRIGIO, BIANCO E NERO)
+   ========================================================================== */
+
+/* Modalità 2: Corpo Grigio */
+.theme-gray-body .grid-cell-date.is-holiday {
+  background-color: #cbd5e1 !important;
+}
+
+/* Modalità 3: Bianco e Nero (Monochrome) */
+.theme-monochrome .grid-cell-col-header {
+  background-color: #475569 !important;
+  color: #ffffff !important;
+}
+.theme-monochrome .grid-cell-date.is-holiday .date-day-name,
+.theme-monochrome .grid-cell-date.is-holiday .date-day-num {
+  color: #000000 !important;
+  font-weight: 800;
+}

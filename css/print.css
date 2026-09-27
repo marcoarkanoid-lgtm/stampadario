@@ -1,0 +1,134 @@
+/**
+ * ==========================================================================
+ * PRINT.CSS - Regole Rigorose per la Stampa e il Salvataggio PDF (@media print)
+ * ==========================================================================
+ * Caratteristiche fondamentali:
+ * - Riempimento millimetrico al 100% dell'altezza verticale (A4: 297mm / A3: 420mm)
+ * - Nessun residuo di spazio vuoto a fine pagina o pagine bianche fantasma
+ * - print-color-adjust: exact per preservare tutti gli sfondi desaturati
+ * - Gestione automatica dei salti pagina (page-break-after) per stampe multi-mese e bisettimanali
+ */
+
+@media print {
+  /* Azzeramento margini e reset del viewport per la stampante */
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Nascondi completamente tutti i componenti dell'interfaccia */
+  .control-sidebar,
+  .floating-island,
+  .modal-overlay,
+  .mobile-controls-bar,
+  .no-print {
+    display: none !important;
+  }
+
+  .preview-viewport {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    background-image: none !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  .sheets-wrapper {
+    transform: none !important;
+    gap: 0 !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Preservazione fedele di tutti i colori di sfondo */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Configurazione del foglio di stampa singolo */
+  .print-sheet {
+    box-shadow: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+  }
+
+  .page-break-after {
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+
+  /* ========================================================================
+     DIMENSIONI MILLIMETRICHE DI RIEMPIMENTO VERTICALE PER FORMATO E ORIENTAMENTO
+     ======================================================================== */
+
+  /* A4 Verticale (210 x 297 mm) */
+  .print-sheet.size-a4-portrait {
+    width: 210mm !important;
+    height: 296mm !important;
+    max-height: 296mm !important;
+    padding: 6mm 7mm 5mm 7mm !important;
+  }
+
+  /* A4 Orizzontale (297 x 210 mm) - Perfetto per Bisettimanale e Quindicinale */
+  .print-sheet.size-a4-landscape {
+    width: 297mm !important;
+    height: 209mm !important;
+    max-height: 209mm !important;
+    padding: 6mm 8mm 5mm 8mm !important;
+  }
+
+  /* A3 Verticale (297 x 420 mm) */
+  .print-sheet.size-a3-portrait {
+    width: 297mm !important;
+    height: 419mm !important;
+    max-height: 419mm !important;
+    padding: 8mm 9mm 6mm 9mm !important;
+  }
+
+  /* A3 Orizzontale (420 x 297 mm) */
+  .print-sheet.size-a3-landscape {
+    width: 420mm !important;
+    height: 296mm !important;
+    max-height: 296mm !important;
+    padding: 8mm 10mm 6mm 10mm !important;
+  }
+
+  /* La griglia si espande verticalmente per occupare l'intero spazio rimanente del foglio */
+  .calendar-grid-container {
+    flex: 1 !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    border-right: none !important;
+  }
+
+  .calendar-grid {
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Garanzia di visibilità dei separatori bianchi in stampa */
+  .grid-cell.is-sunday {
+    border-bottom: 4.5px solid #ffffff !important;
+  }
+
+  .headers-white-separator .grid-cell-col-header {
+    border-bottom: 4.5px solid #ffffff !important;
+  }
+}

@@ -1,0 +1,350 @@
+/**
+ * ==========================================================================
+ * MODALS.CSS - Pop-up Modale Universale Colori & Isola Fluttuante Interattiva
+ * ==========================================================================
+ * - Pop-up modale universale a 32 palette tematiche + 16 colori classici + selettore esadecimale
+ * - Isola fluttuante (Floating Island) interattiva con comandi rapidi (Nome, Formato, Periodo, Zoom)
+ */
+
+/* ==========================================================================
+   ISOLA FLUTTUANTE INTERATTIVA (FLOATING ISLAND)
+   ========================================================================== */
+.floating-island {
+  position: fixed;
+  top: 16px;
+  left: calc(var(--sidebar-width) + (100% - var(--sidebar-width)) / 2);
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.2);
+  color: #f8fafc;
+  pointer-events: auto;
+  transition: all 0.2s ease;
+}
+
+/* Pulsanti interattivi dell'isola (Nome Calendario, Formato, Periodo) */
+.island-btn-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.island-btn-tag:hover {
+  background: rgba(234, 88, 12, 0.35);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.island-icon {
+  font-size: 0.95rem;
+}
+
+.island-label {
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Separatore verticale all'interno dell'isola */
+.island-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.16);
+  margin: 0 4px;
+}
+
+/* Gruppo Zoom */
+.island-zoom-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.island-btn-icon {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f1f5f9;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.island-btn-icon:hover {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+}
+
+.island-zoom-level {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #94a3b8;
+  padding: 0 4px;
+  min-width: 38px;
+  text-align: center;
+}
+
+/* ==========================================================================
+   POP-UP MODALE UNIVERSALE PER LA SCELTA DEL COLORE (32 PALETTE + ESADECIMALE)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+.modal-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-dialog {
+  background: #ffffff;
+  width: 100%;
+  max-width: 520px;
+  border-radius: 18px;
+  box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 88vh;
+  transform: scale(0.94);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.is-open .modal-dialog {
+  transform: scale(1);
+}
+
+.modal-header {
+  padding: 18px 24px;
+  background: #f8fafc;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.btn-modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn-modal-close:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.modal-body {
+  padding: 20px 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Categorie di palette tematiche nella modale */
+.modal-palette-category {
+  margin-bottom: 18px;
+}
+
+.modal-palette-category h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.modal-palette-swatches-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+}
+
+.modal-color-swatch-item {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.modal-color-swatch-item:hover {
+  transform: scale(1.18);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  border-color: #ffffff;
+  z-index: 2;
+}
+
+/* Sezione Custom Hex & Native Color Picker */
+.modal-custom-picker-section {
+  background: #f8fafc;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  margin-top: 14px;
+}
+
+.modal-custom-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.current-color-preview-box {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border: 2px solid #ffffff;
+  flex-shrink: 0;
+}
+
+.native-color-input-wrapper {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid #cbd5e1;
+  flex-shrink: 0;
+}
+
+.native-color-input-wrapper input[type="color"] {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 58px;
+  height: 58px;
+  border: none;
+  cursor: pointer;
+}
+
+.custom-hex-input-group {
+  flex: 1;
+}
+
+.custom-hex-input-group label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.custom-hex-input-group input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-family: monospace;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.btn-apply-custom-hex {
+  padding: 9px 16px;
+  background: var(--accent-orange);
+  color: #ffffff;
+  font-size: 0.86rem;
+  font-weight: 600;
+  border-radius: 8px;
+  align-self: flex-end;
+  cursor: pointer;
+}
+
+.btn-apply-custom-hex:hover {
+  background: var(--accent-orange-hover);
+}
+
+/* ==========================================================================
+   MOBILE CONTROLS BAR (Pulsante mobile per passare ad anteprima/stampa)
+   ========================================================================== */
+.mobile-controls-bar {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .floating-island {
+    left: 50% !important;
+    top: auto;
+    bottom: 20px;
+    width: 92%;
+    justify-content: space-around;
+  }
+
+  .mobile-controls-bar {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    padding: 12px 18px;
+    border-top: 1px solid var(--border-subtle);
+    z-index: 90;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .btn-mobile-toggle {
+    width: 100%;
+    padding: 12px;
+    background: var(--accent-orange);
+    color: #ffffff;
+    font-weight: 700;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+}
