@@ -1,41 +1,55 @@
 /**
  * ==========================================================================
- * MAIN.CSS - Design System, Variabili Cromatiche, Reset e Tipografia Globale
+ * MAIN.CSS - Design System Ispirato alla Palette Mobile UI
  * ==========================================================================
- * Tonalità scelte secondo le direttive UX/Pantone/Material:
- * - Console laterale: schede arancioni calde (Pantone Tangerine / Material Warm Orange)
- * - Viewport anteprima: tonalità complementare professionale (Material Slate / Deep Navy #1e293b)
- * - Supporto per desktop, tablet e visualizzazione mobile fluida
+ * - Sfondo sidebar: Grigio Perla chiarissimo (#F4F4F6) rilassante per la vista
+ * - Tipografia: Plus Jakarta Sans per l'interfaccia e Quicksand per i titoli
+ * - Schede senza bordi con angoli arrotondati (24px) e animazione di sollevamento
  */
 
 :root {
-  /* Palette Console & Schede (Material Tangerine / Pantone Warm Orange) */
-  --bg-sidebar: #f8fafc;
-  --bg-card-orange: #fff7ed;            /* Sfondo caldo arancione pastello per le schede */
-  --bg-card-orange-hover: #ffedd5;
-  --accent-orange: #ea580c;             /* Pantone Tangerine primario */
-  --accent-orange-hover: #c2410c;
-  --accent-orange-light: #fed7aa;
-  --text-orange-dark: #9a3412;
+  /* Font Family dal nuovo codice */
+  --font-ui: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: 'Quicksand', 'Plus Jakarta Sans', sans-serif;
 
-  /* Palette Viewport Anteprima (Material Slate / Deep Navy #1e293b) */
-  --bg-viewport: #1e293b;               /* Sfondo ardesia scuro complementare per far risaltare il foglio */
-  --bg-viewport-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  --sheet-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.45), 0 0 1px 1px rgba(255, 255, 255, 0.08);
+  /* Palette principale dall'interfaccia di riferimento */
+  --card-purple: #B3A2F7;
+  --card-orange: #F5B358;
+  --card-blue:   #A3C6F7;
+  --card-pink:   #EE8EE7;
+  --card-mint:   #8EE1C9;
+  --card-yellow: #F9DC5C;
+  --card-coral:  #F78E79;
+  --bg-dark:     #0F141C;
+  --bg-app:      #F4F4F6;
 
-  /* Elementi UI comuni */
-  --text-main: #0f172a;
+  /* Sfondo Sidebar: Grigio perla chiarissimo per non affaticare la vista */
+  --bg-sidebar: #F4F4F6;
+  --bg-card: #ffffff;
+  
+  /* Canvas di anteprima coordinato */
+  --bg-viewport: #E5E5EB;
+  --bg-viewport-gradient: radial-gradient(circle at 50% 25%, #F4F4F6 0%, #D8D8E0 100%);
+
+  /* Ombra Realistica del Foglio Stampabile */
+  --sheet-shadow: 
+    0 1px 3px rgba(15, 20, 28, 0.05), 
+    0 14px 30px -8px rgba(15, 20, 28, 0.12),
+    0 28px 50px -15px rgba(15, 20, 28, 0.09),
+    0 0 0 1px rgba(15, 20, 28, 0.05);
+
+  /* Elementi UI Comuni */
+  --text-main: #17171C;
+  --text-secondary: #334155;
   --text-muted: #64748b;
-  --border-subtle: #e2e8f0;
-  --border-card-subtle: rgba(234, 88, 12, 0.12);
-  --holiday-red: #d32f2f;
-  --holiday-red-light: #fee2e2;
+  --text-subtle: #94a3b8;
+  --border-subtle: rgba(0, 0, 0, 0.06);
 
-  /* Dimensioni e layout */
+  /* Raggi di curvatura ampi ed ergonomici (Stile Mobile Inspiration) */
   --sidebar-width: 410px;
-  --radius-card: 14px;
-  --radius-btn: 8px;
-  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --radius-card: 24px;
+  --radius-btn: 14px;
+  --radius-input: 12px;
 }
 
 * {
@@ -52,6 +66,7 @@ html, body {
   color: var(--text-main);
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -59,10 +74,10 @@ body {
   position: relative;
 }
 
-/* Scrollbar personalizzate per la console laterale */
+/* Scrollbar Sottile e Pulita */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -71,21 +86,21 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
-  border-radius: 4px;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
 
-/* Pulsanti e link di base */
+/* Pulsanti e Controlli Interattivi Base */
 button {
   font-family: inherit;
   border: none;
   cursor: pointer;
   background: transparent;
   outline: none;
-  transition: all 0.18s ease;
+  transition: all 0.2s ease;
 }
 
 input, select, textarea {
@@ -93,28 +108,30 @@ input, select, textarea {
   outline: none;
 }
 
-/* Stile per badge ed etichette */
+/* Stile Badge */
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
-/* Evidenziazione temporanea delle sezioni quando attivate dall'isola */
+/* Evidenziazione Fluida delle Sezioni */
 @keyframes sectionPulse {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.4); }
-  50% { transform: scale(1.02); box-shadow: 0 0 0 8px rgba(234, 88, 12, 0.15); }
-  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(234, 88, 12, 0); }
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(179, 162, 247, 0.5); }
+  50% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(179, 162, 247, 0.2); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(179, 162, 247, 0); }
 }
 
 .section-highlight {
-  animation: sectionPulse 0.8s ease-in-out 2;
+  animation: sectionPulse 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 2;
 }
 
-/* Ottimizzazione per dispositivi mobili */
+/* Responsive Mobile */
 @media (max-width: 900px) {
   body {
     flex-direction: column;
@@ -132,10 +149,9 @@ input, select, textarea {
     display: none;
     width: 100%;
     min-height: 100vh;
-    padding: 16px 8px;
+    padding: 20px 10px 80px 10px;
   }
 
-  /* Quando l'utente attiva la visualizzazione anteprima da mobile */
   body.mobile-preview-active .control-sidebar {
     display: none;
   }

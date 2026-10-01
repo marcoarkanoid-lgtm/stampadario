@@ -23,7 +23,7 @@ window.CalendarApp = window.CalendarApp || {};
     calendarTitle: 'Planning Mensile',
     titleAlignment: 'left',                // 'left' (sinistra) oppure 'right' (destra)
     centerMonth: false,                    // true (mese centrato) oppure false (lato opposto)
-    headerFont: 'Inter',
+    headerFont: 'Comfortaa',
     headerColor: '#111111',
 
     // 2. Formato Foglio e Impaginazione

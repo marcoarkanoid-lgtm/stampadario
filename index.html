@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calendario Maker Pro - Stampa A4 / A3 ad Alta Fedeltà</title>
+  <title>Stampadario - Planning & Stampa ad Alta Risoluzione</title>
 
-  <!-- Google Fonts Preconnect & Font Primario UI -->
+  <!-- Google Fonts: Plus Jakarta Sans e Quicksand -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&family=Caveat:wght@700&family=Oswald:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
 
   <!-- Fogli di Stile Modulari -->
   <link rel="stylesheet" href="css/main.css">
@@ -24,50 +24,46 @@
        ======================================================================== -->
   <aside class="control-sidebar no-print" id="controlSidebar">
     
-    <!-- Intestazione fissa dell'applicazione -->
+    <!-- Intestazione fissa dell'applicazione (Senza icone) -->
     <header class="sidebar-header">
       <div class="app-title-group">
-        <div class="app-logo-badge">📅</div>
         <div class="app-header-texts">
-          <h1>Calendario Maker</h1>
-          <p>Stampa A4 / A3 ad alta fedeltà</p>
+          <h1>Stampadario</h1>
+          <p>Planning & Stampa ad Alta Risoluzione</p>
         </div>
       </div>
     </header>
 
-    <!-- Box Azione Principale: Stampa / Salva PDF ad Alta Visibilità -->
+    <!-- Box Azione Principale: Stampa / Salva PDF (Senza icone) -->
     <div class="quick-action-box">
       <button type="button" class="btn-primary-print" id="btnPrint">
-        <span class="btn-icon">🖨️</span>
         <span>Stampa / Salva PDF</span>
       </button>
       <p class="print-sub-info" id="printScopeHint">Margini consigliati nel browser: "Nessuno"</p>
     </div>
 
-    <!-- Contenitore a scorrimento verticale con tutte le schede spaziate a 24px -->
+    <!-- Contenitore a scorrimento verticale con schede a colori senza bordi -->
     <div class="sidebar-scrollable-content">
 
       <!-- ====================================================================
-           1. INTESTAZIONE CALENDARIO
+           1. INTESTAZIONE CALENDARIO (Azzurro Pastello #A3C6F7)
            ==================================================================== -->
       <details class="control-section" id="secCalendarTitle" open>
         <summary class="section-summary">
           <div class="section-title-wrap">
-            <span class="section-icon">✍️</span>
             <span>Intestazione Calendario</span>
           </div>
-          <span class="section-arrow">▼</span>
         </summary>
         <div class="section-content">
           <div class="form-group">
             <label class="form-label" for="inputCalendarTitle">Nome del Calendario (opzionale)</label>
             <input type="text" id="inputCalendarTitle" class="form-control"
                    placeholder="Es. Planning Famiglia, Studio, Turni..." maxlength="60" value="Planning Mensile">
-            <span style="font-size: 0.72rem; color: #64748b; margin-top: 4px; display: block;">Se lasciato vuoto, non apparirà alcun testo.</span>
+            <span class="form-hint">Se lasciato vuoto, non apparirà alcun testo.</span>
           </div>
 
           <div class="form-group" style="margin-top: 10px;">
-            <label class="form-label">Posizione Nome del Calendario</label>
+            <label class="form-label">Posizione Nome</label>
             <div class="toggle-btn-group" id="groupTitleAlignment">
               <button type="button" class="toggle-btn active" id="btnTitleAlignLeft" data-align="left">A Sinistra</button>
               <button type="button" class="toggle-btn" id="btnTitleAlignRight" data-align="right">A Destra</button>
@@ -75,28 +71,26 @@
           </div>
 
           <div class="form-group" style="margin-top: 10px;">
-            <label style="display: flex; align-items: center; gap: 8px; font-size: 0.84rem; cursor: pointer; color: #334155;">
-              <input type="checkbox" id="checkCenterMonth" style="accent-color: var(--accent-orange); width: 16px; height: 16px;">
-              <span>Posiziona il Mese al Centro (anziché nel lato opposto)</span>
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 0.80rem; cursor: pointer; color: #17171C; font-weight: 600;">
+              <input type="checkbox" id="checkCenterMonth" style="accent-color: var(--bg-dark); width: 16px; height: 16px;">
+              <span>Posiziona il Mese al Centro</span>
             </label>
           </div>
         </div>
       </details>
 
       <!-- ====================================================================
-           2. TIPOGRAFIA & STILE GLOBALE (SEZIONE SUCCESSIVA DEDICATA)
+           2. TIPOGRAFIA & STILE GLOBALE (Lilla Pastello #B3A2F7)
            ==================================================================== -->
       <details class="control-section" id="secGlobalTypography" open>
         <summary class="section-summary">
           <div class="section-title-wrap">
-            <span class="section-icon">🔤</span>
-            <span>Tipografia & Stile Globale</span>
+            <span>Tipografia & Colore</span>
           </div>
-          <span class="section-arrow">▼</span>
         </summary>
         <div class="section-content">
           <div class="form-group">
-            <label class="form-label" for="selectHeaderFont">Carattere Tipografico Globale (24+ Font Liberi)</label>
+            <label class="form-label" for="selectHeaderFont">Carattere Tipografico</label>
             <select id="selectHeaderFont" class="form-select">
               <!-- Popolato dinamicamente da ui.js con font categorizzati -->
             </select>
@@ -108,30 +102,28 @@
               <span class="color-swatch-circle" id="headerColorCircle" style="background-color: #111111;"></span>
               <span class="color-btn-label">Scegli Colore (32 Tonalità Tematiche)...</span>
             </button>
-            <span style="font-size: 0.72rem; color: #64748b; margin-top: 5px; display: block; line-height: 1.3;">
-              Si applica a tutto il calendario (con eccezione del numero/giorno a inizio riga e delle intestazioni colonna).
+            <span class="form-hint">
+              Si applica a tutto il calendario (eccetto intestazioni colonna e numero giorno).
             </span>
           </div>
         </div>
       </details>
 
       <!-- ====================================================================
-           3. FORMATO FOGLIO & IMPAGINAZIONE
+           3. FORMATO FOGLIO & IMPAGINAZIONE (Menta Pastello #8EE1C9)
            ==================================================================== -->
       <details class="control-section" id="secPaperFormat" open>
         <summary class="section-summary">
           <div class="section-title-wrap">
-            <span class="section-icon">📄</span>
-            <span>Formato Foglio & Impaginazione</span>
+            <span>Formato Carta & Layout</span>
           </div>
-          <span class="section-arrow">▼</span>
         </summary>
         <div class="section-content">
           <div class="form-group">
             <label class="form-label">Dimensione Carta</label>
             <div class="toggle-btn-group">
-              <button type="button" class="toggle-btn active" id="btnPaperSizeA4" data-paper="A4">A4 (Standard 210×297 mm)</button>
-              <button type="button" class="toggle-btn" id="btnPaperSizeA3" data-paper="A3">A3 (Grande 297×420 mm)</button>
+              <button type="button" class="toggle-btn active" id="btnPaperSizeA4" data-paper="A4">A4 (210×297 mm)</button>
+              <button type="button" class="toggle-btn" id="btnPaperSizeA3" data-paper="A3">A3 (297×420 mm)</button>
             </div>
           </div>
 
@@ -147,12 +139,12 @@
               </div>
             </label>
 
-            <!-- Opzione 2: Verticale Estesa (NUOVA OPZIONE RICHIESTA) -->
+            <!-- Opzione 2: Verticale Estesa -->
             <label class="layout-radio-card">
               <input type="radio" name="layoutModeRadio" value="portrait-extended">
               <div class="layout-radio-info">
-                <span class="layout-radio-title">Verticale Estesa (Mese a Pagina Singola da Lun a Dom)</span>
-                <span class="layout-radio-desc">Parte sempre dal Lunedì e chiude alla Domenica; celle a colori con data fuori mese grigia.</span>
+                <span class="layout-radio-title">Verticale Estesa (Da Lun a Dom)</span>
+                <span class="layout-radio-desc">Parte sempre dal Lunedì e chiude alla Domenica; celle fuori mese attenuate.</span>
               </div>
             </label>
 
@@ -161,7 +153,7 @@
               <input type="radio" name="layoutModeRadio" value="landscape-biweekly">
               <div class="layout-radio-info">
                 <span class="layout-radio-title">Orizzontale Bisettimanale (2 settimane per foglio)</span>
-                <span class="layout-radio-desc">14 giorni esatti (Lun-Dom); celle a tutta altezza a colori per l'intero periodo.</span>
+                <span class="layout-radio-desc">14 giorni esatti (Lun-Dom); celle a tutta altezza per l'intero periodo.</span>
               </div>
             </label>
 
@@ -187,15 +179,13 @@
       </details>
 
       <!-- ====================================================================
-           4. PERIODO DA STAMPARE
+           4. PERIODO DA STAMPARE (Arancio Caldo Pastello #F5B358)
            ==================================================================== -->
       <details class="control-section" id="secPrintPeriod" open>
         <summary class="section-summary">
           <div class="section-title-wrap">
-            <span class="section-icon">🗓️</span>
-            <span>Periodo da Stampare</span>
+            <span>Periodo di Stampa</span>
           </div>
-          <span class="section-arrow">▼</span>
         </summary>
         <div class="section-content">
           <div class="form-group">
@@ -232,9 +222,13 @@
               </div>
             </div>
             <div style="display: flex; gap: 6px; margin-top: 6px;">
-              <button type="button" class="toggle-btn" id="btnPrevMonth" style="background: #ffffff; border: 1px solid #cbd5e1;">◀ Mese Prec.</button>
-              <button type="button" class="toggle-btn" id="btnCurrentMonth" style="background: #ffffff; border: 1px solid #cbd5e1;">Oggi</button>
-              <button type="button" class="toggle-btn" id="btnNextMonth" style="background: #ffffff; border: 1px solid #cbd5e1;">Mese Succ. ▶</button>
+              <button type="button" class="toggle-btn" id="btnPrevMonth" style="background: rgba(255,255,255,0.7);">
+                Prec.
+              </button>
+              <button type="button" class="toggle-btn" id="btnCurrentMonth" style="background: rgba(255,255,255,0.7);">Oggi</button>
+              <button type="button" class="toggle-btn" id="btnNextMonth" style="background: rgba(255,255,255,0.7);">
+                Succ.
+              </button>
             </div>
           </div>
 
@@ -242,18 +236,22 @@
           <div id="containerFullYear" style="display: none;">
             <div class="form-group">
               <label class="form-label" for="inputFullYear">Anno Completo (12 Mesi consecutivi)</label>
-              <div style="display: flex; gap: 8px; align-items: center;">
-                <button type="button" class="btn-move-col" id="btnPrevFullYear" style="padding: 9px 12px; font-size: 0.9rem;">◀</button>
-                <input type="number" id="inputFullYear" class="form-control" value="2026" min="2020" max="2040" style="text-align: center; font-weight: 700; font-size: 1.05rem;">
-                <button type="button" class="btn-move-col" id="btnNextFullYear" style="padding: 9px 12px; font-size: 0.9rem;">▶</button>
+              <div style="display: flex; gap: 6px; align-items: center;">
+                <button type="button" class="btn-move-col" id="btnPrevFullYear" style="padding: 7px 12px; font-weight: 700;">
+                  Prec.
+                </button>
+                <input type="number" id="inputFullYear" class="form-control" value="2026" min="2020" max="2040" style="text-align: center; font-weight: 700; font-size: 1rem;">
+                <button type="button" class="btn-move-col" id="btnNextFullYear" style="padding: 7px 12px; font-weight: 700;">
+                  Succ.
+                </button>
               </div>
             </div>
           </div>
 
           <!-- Caso 3: Periodo Personalizzato Da / A (max 24 mesi) -->
           <div id="containerCustomPeriod" style="display: none;">
-            <div class="form-group" style="background: #ffffff; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0;">
-              <label class="form-label" style="color: var(--accent-orange);">Da (Inizio Periodo):</label>
+            <div class="form-group" style="background: rgba(255,255,255,0.6); padding: 10px; border-radius: 14px;">
+              <label class="form-label">Da (Inizio Periodo):</label>
               <div style="display: flex; gap: 6px;">
                 <select id="selectRangeStartMonth" class="form-select form-control-sm" style="flex: 2;">
                   <option value="0">Gennaio</option><option value="1">Febbraio</option><option value="2">Marzo</option>
@@ -264,7 +262,7 @@
                 <input type="number" id="inputRangeStartYear" class="form-control form-control-sm" value="2026" min="2020" max="2040" style="flex: 1.2;">
               </div>
 
-              <label class="form-label" style="color: var(--accent-orange); margin-top: 10px;">A (Fine Periodo - Max 24 mesi):</label>
+              <label class="form-label" style="margin-top: 10px;">A (Fine Periodo - Max 24 mesi):</label>
               <div style="display: flex; gap: 6px;">
                 <select id="selectRangeEndMonth" class="form-select form-control-sm" style="flex: 2;">
                   <option value="0">Gennaio</option><option value="1">Febbraio</option><option value="2">Marzo</option>
@@ -280,15 +278,13 @@
       </details>
 
       <!-- ====================================================================
-           5. COLONNE CONTENUTI (NOME 100%, SFONDO, TESTO, TASTO IN FONDO)
+           5. COLONNE CONTENUTI (Rosa Pastello #EE8EE7)
            ==================================================================== -->
       <details class="control-section" id="secColumnsConfig" open>
         <summary class="section-summary">
           <div class="section-title-wrap">
-            <span class="section-icon">📊</span>
             <span>Colonne Contenuti</span>
           </div>
-          <span class="section-arrow">▼</span>
         </summary>
         <div class="section-content">
           <!-- Elenco dinamico delle schede colonna (gestito da ui.js) -->
@@ -297,18 +293,15 @@
       </details>
 
       <!-- ====================================================================
-           6. GRAFICA, BORDI & MODALITÀ CROMATICHE
+           6. GRAFICA, BORDI & MODALITÀ CROMATICHE (Giallo Solare #F9DC5C)
            ==================================================================== -->
       <details class="control-section" id="secStyleGraphics">
         <summary class="section-summary">
           <div class="section-title-wrap">
-            <span class="section-icon">🎨</span>
-            <span>Grafica, Bordi & Modalità Cromatiche</span>
+            <span>Stile & Bordi Griglia</span>
           </div>
-          <span class="section-arrow">▼</span>
         </summary>
         <div class="section-content">
-          <!-- Nuovo selettore richiesto: Stile Cromatico -->
           <div class="form-group">
             <label class="form-label" for="selectColorMode">Stile Cromatico</label>
             <select id="selectColorMode" class="form-select">
@@ -321,17 +314,17 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="selectVerticalBorders">Bordi Verticali delle Colonne</label>
+            <label class="form-label" for="selectVerticalBorders">Bordi Verticali Colonne</label>
             <select id="selectVerticalBorders" class="form-select">
               <option value="all">Completi (tutte le celle)</option>
               <option value="columns-only">Solo tra colonne contenuti (senza bordi esterni)</option>
-              <option value="none">Nessun bordo verticale (senza bordi esterni)</option>
+              <option value="none">Nessun bordo verticale</option>
             </select>
           </div>
 
           <div class="form-group" style="margin-top: 10px;">
-            <label style="display: flex; align-items: center; gap: 8px; font-size: 0.84rem; cursor: pointer; color: #334155;">
-              <input type="checkbox" id="checkRepeatHeaders" style="accent-color: var(--accent-orange); width: 16px; height: 16px;">
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 0.80rem; cursor: pointer; color: #17171C; font-weight: 600;">
+              <input type="checkbox" id="checkRepeatHeaders" style="accent-color: var(--bg-dark); width: 16px; height: 16px;">
               <span>Ripeti intestazioni colonne prima del Lunedì</span>
             </label>
           </div>
@@ -339,22 +332,20 @@
       </details>
 
       <!-- ====================================================================
-           7. FESTIVITÀ PERSONALIZZATE (FORMATTAZIONE IDENTICA ALLA DOMENICA, MAX 5)
+           7. FESTIVITÀ PERSONALIZZATE (Corallo Pastello #F78E79)
            ==================================================================== -->
       <details class="control-section" id="secCustomHolidays">
         <summary class="section-summary">
           <div class="section-title-wrap">
-            <span class="section-icon">⭐</span>
             <span>Festività Personalizzate (max 5)</span>
           </div>
-          <span class="section-arrow">▼</span>
         </summary>
         <div class="section-content">
-          <p style="font-size: 0.77rem; color: #64748b; margin-bottom: 10px;">
-            I giorni festivi aggiunti vengono evidenziati con la stessa formattazione della domenica (testo rosso ed evidenziazione festiva tenue).
+          <p class="form-hint" style="margin-bottom: 8px;">
+            I giorni festivi aggiunti vengono evidenziati con la stessa formattazione della domenica.
           </p>
 
-          <div id="customHolidaysList" style="margin-bottom: 12px;"></div>
+          <div id="customHolidaysList" style="margin-bottom: 10px;"></div>
 
           <div class="custom-holidays-box">
             <div style="display: flex; gap: 6px; margin-bottom: 8px;">
@@ -364,31 +355,29 @@
                 <option value="6">Luglio</option><option value="7">Agosto</option><option value="8">Settembre</option>
                 <option value="9">Ottobre</option><option value="10">Novembre</option><option value="11">Dicembre</option>
               </select>
-              <input type="number" id="inputCustomDay" class="form-control form-control-sm" placeholder="Giorno (1-31)" min="1" max="31" value="1" style="flex: 1.2;">
+              <input type="number" id="inputCustomDay" class="form-control form-control-sm" placeholder="Giorno" min="1" max="31" value="1" style="flex: 1.2;">
             </div>
             <input type="text" id="inputCustomName" class="form-control form-control-sm" placeholder="Nome festa (es. Santo Patrono)" maxlength="35" style="margin-bottom: 8px;">
-            <button type="button" class="btn-primary-print" id="btnAddCustomHoliday" style="padding: 7px; font-size: 0.82rem; background: var(--accent-orange);">
-              + Aggiungi Festività
+            <button type="button" class="btn-primary-print" id="btnAddCustomHoliday" style="padding: 9px; font-size: 0.82rem; background: var(--bg-dark);">
+              <span>+ Aggiungi Festività</span>
             </button>
           </div>
         </div>
       </details>
 
       <!-- ====================================================================
-           8. SALVATAGGIO, PRESET & PRIVACY (CONFORME GDPR)
+           8. SALVATAGGIO, PRESET & PRIVACY (Azzurro Pastello #A3C6F7)
            ==================================================================== -->
       <details class="control-section" id="secSaveLoad">
         <summary class="section-summary">
           <div class="section-title-wrap">
-            <span class="section-icon">💾</span>
-            <span>Salvataggio, Preset & Privacy</span>
+            <span>Preset & Dati</span>
           </div>
-          <span class="section-arrow">▼</span>
         </summary>
         <div class="section-content">
           <!-- Preset Rapidi: applica SOLO la palette senza toccare testi -->
           <div class="form-group">
-            <label class="form-label" for="selectThemePreset">Applica Solo Tema Cromatico</label>
+            <label class="form-label" for="selectThemePreset">Applica Tema Cromatico Rapido</label>
             <div style="display: flex; gap: 6px;">
               <select id="selectThemePreset" class="form-select form-control-sm" style="flex: 1;">
                 <option value="family-pastel">Pastello Famiglia (Delicato)</option>
@@ -396,29 +385,31 @@
                 <option value="nature-earth">Terra & Foresta (Naturale)</option>
                 <option value="bright-energy">Energia Fluo (Vivace)</option>
               </select>
-              <button type="button" class="btn-move-col" id="btnApplyThemePreset" style="padding: 6px 10px; font-weight: 600;">Applica</button>
+              <button type="button" class="btn-move-col" id="btnApplyThemePreset" style="width: auto; padding: 0 12px; font-weight: 700;">Applica</button>
             </div>
-            <span style="font-size: 0.72rem; color: #64748b; margin-top: 4px; display: block;">Non modifica i nomi delle colonne né le tue date.</span>
+            <span class="form-hint">Non modifica i nomi delle colonne né le date.</span>
           </div>
 
-          <div style="display: flex; gap: 8px; margin-top: 14px;">
-            <button type="button" class="toggle-btn" id="btnExportJson" style="background: #ffffff; border: 1px solid #cbd5e1; flex: 1;">
-              📥 Esporta JSON
+          <div style="display: flex; gap: 8px; margin-top: 12px;">
+            <button type="button" class="toggle-btn" id="btnExportJson" style="background: rgba(255,255,255,0.7); flex: 1;">
+              <span>Esporta JSON</span>
             </button>
-            <label class="toggle-btn" style="background: #ffffff; border: 1px solid #cbd5e1; flex: 1; cursor: pointer; text-align: center; margin: 0;">
-              📤 Importa JSON
+            <label class="toggle-btn" style="background: rgba(255,255,255,0.7); flex: 1; cursor: pointer; text-align: center; margin: 0;">
+              <span>Importa JSON</span>
               <input type="file" id="fileImportJson" accept=".json" style="display: none;">
             </label>
           </div>
 
-          <div style="margin-top: 16px; border-top: 1px solid #e2e8f0; padding-top: 12px; text-align: center;">
-            <button type="button" id="btnClearData" style="font-size: 0.76rem; color: #dc2626; text-decoration: underline; background: none; border: none; cursor: pointer;">
-              Resetta Tutte le Impostazioni (Diritto all'Oblio)
+          <div style="margin-top: 14px; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 10px; text-align: center;">
+            <button type="button" id="btnClearData" style="font-size: 0.74rem; color: #dc2626; text-decoration: underline; background: none; border: none; cursor: pointer; font-weight: 600;">
+              Resetta Impostazioni Predefinite
             </button>
           </div>
 
           <div class="privacy-link-row">
-            <a href="privacy.html" class="privacy-link" target="_blank">Informativa sulla Privacy & Normativa GDPR ↗</a>
+            <a href="privacy.html" class="privacy-link" target="_blank">
+              <span>Informativa Privacy (GDPR) ↗</span>
+            </a>
           </div>
         </div>
       </details>
@@ -427,28 +418,25 @@
   </aside>
 
   <!-- ========================================================================
-       AREA PRINCIPALE: VIEWPORT DI ANTEPRIMA & ISOLA FLUTTUANTE INTERATTIVA
+       AREA PRINCIPALE: VIEWPORT DI ANTEPRIMA & STUDIO TOOLBAR
        ======================================================================== -->
   <main class="preview-viewport" id="previewViewport">
 
-    <!-- ISOLA FLUTTUANTE INTERATTIVA (FLOATING ISLAND) -->
+    <!-- STUDIO TOOLBAR SUPERIORE (Senza icone) -->
     <div class="floating-island no-print" id="floatingIsland">
       
-      <!-- Tag 1: Intestazione Calendario (click apre focus su Sezione 1) -->
+      <!-- Tag 1: Intestazione Calendario -->
       <button type="button" class="island-btn-tag" id="islandBtnTitle" title="Clicca per modificare l'Intestazione del Calendario">
-        <span class="island-icon">✍️</span>
         <span class="island-label">Planning Mensile</span>
       </button>
 
-      <!-- Tag 2: Formato Carta (click apre focus su Sezione 2) -->
+      <!-- Tag 2: Formato Carta -->
       <button type="button" class="island-btn-tag" id="islandBtnPaper" title="Clicca per modificare Formato Carta e Layout">
-        <span class="island-icon">📄</span>
         <span class="island-label">A4 Verticale</span>
       </button>
 
-      <!-- Tag 3: Periodo (click apre focus su Sezione 3) -->
+      <!-- Tag 3: Periodo -->
       <button type="button" class="island-btn-tag" id="islandBtnPeriod" title="Clicca per modificare il Periodo da stampare">
-        <span class="island-icon">🗓️</span>
         <span class="island-label">Ottobre 2026</span>
       </button>
 
@@ -456,17 +444,17 @@
 
       <!-- Controlli Zoom & Adattamento -->
       <div class="island-zoom-group">
-        <button type="button" class="island-btn-icon" id="islandBtnZoomOut" title="Riduci Zoom">🔍−</button>
+        <button type="button" class="island-btn-icon" id="islandBtnZoomOut" title="Riduci Zoom">−</button>
         <span class="island-zoom-level" id="badgeZoomLevel">100%</span>
-        <button type="button" class="island-btn-icon" id="islandBtnZoomIn" title="Aumenta Zoom">🔍+</button>
-        <button type="button" class="island-btn-icon" id="islandBtnFitScreen" title="Adatta allo Schermo">⛶</button>
+        <button type="button" class="island-btn-icon" id="islandBtnZoomIn" title="Aumenta Zoom">+</button>
+        <button type="button" class="island-btn-icon" id="islandBtnFitScreen" title="Adatta allo Schermo">Adatta</button>
       </div>
 
       <div class="island-divider"></div>
-      <span class="badge" id="badgeSheetsCount" style="background: rgba(234, 88, 12, 0.3); color: #ffedd5; font-size: 0.74rem;">1 Foglio</span>
+      <span class="badge" id="badgeSheetsCount">1 Foglio</span>
     </div>
 
-    <!-- Contenitore dei fogli renderizzati (singolo o sequenza multi-mese / bisettimanale) -->
+    <!-- Contenitore dei fogli renderizzati -->
     <div class="sheets-wrapper" id="sheetsWrapper"></div>
 
   </main>
@@ -476,19 +464,18 @@
        ======================================================================== -->
   <div class="mobile-controls-bar no-print">
     <button type="button" class="btn-mobile-toggle" id="btnMobileTogglePreview">
-      <span>👁️</span>
       <span class="btn-label">Mostra Anteprima / Stampa</span>
     </button>
   </div>
 
   <!-- ========================================================================
-       POP-UP MODALE UNIVERSALE PER LA SCELTA DEL COLORE (32 PALETTE + ESADECIMALE)
+       POP-UP MODALE UNIVERSALE PER LA SCELTA DEL COLORE
        ======================================================================== -->
   <div class="modal-overlay" id="universalColorModal">
     <div class="modal-dialog">
       <div class="modal-header">
         <h3 id="colorModalTitle">Seleziona Colore</h3>
-        <button type="button" class="btn-modal-close" id="btnCloseColorModal" title="Chiudi">✕</button>
+        <button type="button" class="btn-modal-close" id="btnCloseColorModal" title="Chiudi">Chiudi</button>
       </div>
 
       <div class="modal-body">
@@ -520,35 +507,32 @@
        MODALE INFORMATIVA SULLA SCELTA DELLA CARTELLA DI SALVATAGGIO
        ======================================================================== -->
   <div class="modal-overlay" id="modalFolderHelp">
-    <div class="modal-dialog" style="max-width: 540px;">
+    <div class="modal-dialog" style="max-width: 520px;">
       <div class="modal-header">
-        <h3 style="display: flex; align-items: center; gap: 8px;">
-          <span>📁</span>
-          <span>Finestra Scelta Cartella di Salvataggio</span>
-        </h3>
-        <button type="button" class="btn-modal-close" id="btnCloseFolderHelp" title="Chiudi">✕</button>
+        <h3>Salvataggio File di Configurazione</h3>
+        <button type="button" class="btn-modal-close" id="btnCloseFolderHelp" title="Chiudi">Chiudi</button>
       </div>
 
-      <div class="modal-body" style="padding: 22px 24px; font-size: 0.88rem; line-height: 1.55; color: #334155;">
-        <p style="margin-bottom: 14px;">
-          Il file di configurazione è stato esportato e scaricato.
+      <div class="modal-body" style="padding: 20px 24px; font-size: 0.84rem; line-height: 1.55; color: var(--text-secondary);">
+        <p style="margin-bottom: 12px;">
+          Il file di configurazione JSON è stato generato e salvato nei tuoi Download.
         </p>
 
-        <div style="background: #fff7ed; border-left: 4px solid var(--accent-orange); padding: 14px 16px; border-radius: 8px; margin-bottom: 16px;">
-          <strong style="color: #9a3412; display: block; font-size: 0.92rem; margin-bottom: 6px;">
-            💡 Come scegliere sempre la cartella con la finestra di sistema:
+        <div style="background: rgba(179, 162, 247, 0.15); border-left: 3px solid #805ad5; padding: 12px 14px; border-radius: 12px; margin-bottom: 14px;">
+          <strong style="color: #17171C; display: block; font-size: 0.86rem; margin-bottom: 5px;">
+            Come scegliere ogni volta dove salvare i file:
           </strong>
-          <p style="margin-bottom: 8px;">
-            Nei browser web, la finestra "Salva con nome" che ti fa navigare tra le cartelle del computer si attiva in un istante:
+          <p style="margin-bottom: 6px; font-size: 0.80rem;">
+            Nelle impostazioni del tuo browser web puoi abilitare la richiesta di salvataggio:
           </p>
-          <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px;">
-            <li>In <strong>Firefox</strong>: apri <strong>Impostazioni</strong> ➔ scheda <strong>Generale</strong> ➔ sezione <strong>Download</strong> ➔ spunta l'opzione <strong>"Chiedi sempre dove salvare i file"</strong>.</li>
-            <li>In alternativa, puoi avviare l'app con lo script <strong><code>./avvia.sh</code></strong> presente nella cartella del progetto: aprirà direttamente la finestra nativa di sistema Linux per selezionare la cartella.</li>
+          <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 0.78rem;">
+            <li>In <strong>Firefox</strong>: <em>Impostazioni</em> ➔ <em>Generale</em> ➔ <em>Download</em> ➔ attiva <strong>"Chiedi sempre dove salvare i file"</strong>.</li>
+            <li>In <strong>Chrome / Brave / Edge</strong>: <em>Impostazioni</em> ➔ <em>Download</em> ➔ attiva <strong>"Chiedi dove salvare ogni file prima di scaricarlo"</strong>.</li>
           </ul>
         </div>
 
-        <div style="display: flex; justify-content: flex-end; margin-top: 18px;">
-          <button type="button" class="btn-primary-print" id="btnConfirmFolderHelp" style="padding: 9px 24px; font-size: 0.88rem; width: auto; background: var(--accent-orange);">
+        <div style="display: flex; justify-content: flex-end; margin-top: 14px;">
+          <button type="button" class="btn-primary-print" id="btnConfirmFolderHelp" style="padding: 10px 22px; font-size: 0.84rem; width: auto; background: var(--bg-dark);">
             Ho capito
           </button>
         </div>

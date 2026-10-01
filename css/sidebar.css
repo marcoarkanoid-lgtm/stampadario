@@ -1,33 +1,33 @@
 /**
  * ==========================================================================
- * SIDEBAR.CSS - Console di Controllo Laterale & Schede Arancioni Calde
+ * SIDEBAR.CSS - Console con Schede a Colori Pastello (Ispirata alla Nuova UI)
  * ==========================================================================
- * Specifiche grafiche applicate:
- * - Spazio verticale tra le schede TRIPLICATO (margin-bottom: 24px)
- * - Nessun bordo perimetrale duro: design a isola morbido con sfondo caldo Tangerine (#fff7ed)
- * - Schede colonne: nome a larghezza 100%, pulsanti Sfondo e Testo affiancati al 50%
- * - Tasto "Aggiungi Colonna" posizionato rigorosamente in fondo alla lista
+ * - Sfondo grigio chiarissimo (#F4F4F6) riposante per gli occhi
+ * - Schede colorate a rotazione senza bordi con angoli arrotondati a 24px
+ * - Animazione al passaggio del mouse: la scheda si solleva dolcemente
+ * - Spaziatura tra schede di 24px
+ * - Zero icone, solo tipografia pulita
  */
 
 .control-sidebar {
   width: var(--sidebar-width);
-  min-width: 380px;
-  max-width: 460px;
+  min-width: 370px;
+  max-width: 450px;
   background-color: var(--bg-sidebar);
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
   height: 100vh;
   z-index: 50;
-  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.06);
+  box-shadow: 4px 0 24px rgba(15, 20, 28, 0.04);
   flex-shrink: 0;
 }
 
-/* Intestazione fissa dell'app */
+/* Intestazione Applicazione */
 .sidebar-header {
-  padding: 16px 22px;
-  background: #ffffff;
-  border-bottom: 1px solid var(--border-subtle);
+  padding: 18px 22px;
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -35,110 +35,149 @@
 
 .app-title-group {
   display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.app-logo-badge {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--accent-orange), #f97316);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  box-shadow: 0 4px 10px rgba(234, 88, 12, 0.3);
+  flex-direction: column;
 }
 
 .app-header-texts h1 {
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
   color: var(--text-main);
-  line-height: 1.2;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .app-header-texts p {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 2px;
 }
 
-/* Box Azione Principale di Stampa (Alta visibilità) */
+/* Pulsante Azione Stampa Primaria */
 .quick-action-box {
-  padding: 16px 20px;
-  background: #ffffff;
-  border-bottom: 1px solid var(--border-subtle);
+  padding: 14px 20px;
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .btn-primary-print {
   width: 100%;
-  padding: 14px 18px;
-  background: linear-gradient(135deg, #16a34a, #15803d);
+  padding: 13px 18px;
+  background: var(--bg-dark);
   color: #ffffff;
-  border-radius: 10px;
-  font-size: 1.05rem;
+  border-radius: 18px;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
   font-weight: 700;
+  letter-spacing: 0.01em;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
+  box-shadow: 0 4px 14px rgba(15, 20, 28, 0.2);
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .btn-primary-print:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(22, 163, 74, 0.45);
+  background: #1e2638;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 20, 28, 0.25);
 }
 
 .btn-primary-print:active {
-  transform: translateY(1px);
+  transform: scale(0.98);
 }
 
 .print-sub-info {
-  margin-top: 8px;
-  font-size: 0.76rem;
+  margin-top: 6px;
+  font-size: 0.72rem;
   color: var(--text-muted);
   text-align: center;
+  font-weight: 500;
 }
 
-/* Area scorrevole della console contenente tutte le schede */
+/* Area Scorrevole delle Impostazioni */
 .sidebar-scrollable-content {
   flex: 1;
   overflow-y: auto;
-  padding: 20px 18px 40px 18px;
+  padding: 16px 18px 40px 18px;
 }
 
 /* ==========================================================================
-   SCHEDE DELLA CONSOLE: SPAZIATURA TRIPLICATA (24px) E SFONDO ARANCIONE CALDO
+   SCHEDE A COLORI SENZA BORDI CON ANIMAZIONE ELEVAZIONE E ANGOLI 24PX
    ========================================================================== */
 .control-section {
-  background-color: var(--bg-card-orange);
-  border-radius: var(--radius-card);
-  border: none; /* Rimossi i bordi perimetrali come richiesto */
-  box-shadow: 0 2px 10px rgba(234, 88, 12, 0.06);
-  margin-bottom: 24px; /* SPAZIO VERTICALE TRIPLICATO (24px) */
+  border-radius: 24px;
+  border: none !important; /* Nessun bordo */
+  margin-bottom: 24px;     /* Distanza di 24px tra le schede */
   overflow: hidden;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  position: relative;
+  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
+/* Animazione scheda che si alza al passaggio del mouse */
 .control-section:hover {
-  box-shadow: 0 4px 16px rgba(234, 88, 12, 0.10);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 18px 28px -10px rgba(0, 0, 0, 0.10), 0 8px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-/* Intestazione della scheda / Summary del details */
+/* Colori Pastello Alternati per ciascuna Scheda */
+#secCalendarTitle {
+  background-color: var(--card-blue);   /* #A3C6F7 */
+  color: #17171C;
+}
+
+#secGlobalTypography {
+  background-color: var(--card-purple); /* #B3A2F7 */
+  color: #17171C;
+}
+
+#secPaperFormat {
+  background-color: var(--card-mint);   /* #8EE1C9 */
+  color: #17171C;
+}
+
+#secPrintPeriod {
+  background-color: var(--card-orange); /* #F5B358 */
+  color: #17171C;
+}
+
+#secColumnsConfig {
+  background-color: var(--card-pink);   /* #EE8EE7 */
+  color: #17171C;
+}
+
+#secStyleGraphics {
+  background-color: var(--card-yellow); /* #F9DC5C */
+  color: #17171C;
+}
+
+#secCustomHolidays {
+  background-color: var(--card-coral);  /* #F78E79 */
+  color: #17171C;
+}
+
+#secSaveLoad {
+  background-color: var(--card-blue);   /* #A3C6F7 */
+  color: #17171C;
+}
+
+/* Intestazione della Scheda (Summary) */
 .section-summary {
-  padding: 14px 18px;
+  padding: 16px 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
   list-style: none;
-  font-size: 0.95rem;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
   font-weight: 700;
-  color: var(--text-orange-dark);
+  color: #17171C;
   user-select: none;
+  background: transparent;
 }
 
 .section-summary::-webkit-details-marker {
@@ -148,28 +187,17 @@
 .section-title-wrap {
   display: flex;
   align-items: center;
-  gap: 10px;
-}
-
-.section-icon {
-  font-size: 1.15rem;
-}
-
-.section-arrow {
-  font-size: 0.75rem;
-  color: var(--accent-orange);
-  transition: transform 0.2s ease;
-}
-
-.control-section[open] .section-arrow {
-  transform: rotate(180deg);
 }
 
 .section-content {
-  padding: 4px 18px 18px 18px;
+  padding: 0 16px 16px 16px;
+  background: transparent;
+  border-top: none;
 }
 
-/* Campi Form e Controlli */
+/* ==========================================================================
+   CAMPI FORM, INPUT E SELECT DENTRO LE SCHEDE
+   ========================================================================== */
 .form-group {
   margin-bottom: 12px;
 }
@@ -180,85 +208,116 @@
 
 .form-label {
   display: block;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #475569;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #17171C;
   margin-bottom: 6px;
+  opacity: 0.9;
 }
 
 .form-control, .form-select {
   width: 100%;
   padding: 9px 12px;
   background-color: #ffffff;
-  border: 1px solid #cbd5e1;
-  border-radius: var(--radius-btn);
-  font-size: 0.88rem;
-  color: var(--text-main);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  border: none;
+  border-radius: var(--radius-input);
+  font-family: var(--font-ui);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #17171C;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.15s ease;
 }
 
 .form-control:focus, .form-select:focus {
-  border-color: var(--accent-orange);
-  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.18);
+  box-shadow: 0 0 0 3px rgba(15, 20, 28, 0.25);
 }
 
 .form-control-sm {
-  padding: 5px 8px;
-  font-size: 0.82rem;
-  border-radius: 6px;
-  border: 1px solid #cbd5e1;
+  padding: 6px 10px;
+  font-size: 0.80rem;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Pulsanti Toggle (Formato A4/A3, Periodo Mese/Anno/Range) */
+.form-hint {
+  font-size: 0.72rem;
+  color: #17171C;
+  opacity: 0.75;
+  margin-top: 4px;
+  display: block;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   PULSANTI A SEGMENTI (Segmented Controls)
+   ========================================================================== */
 .toggle-btn-group {
   display: flex;
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
   padding: 4px;
-  border-radius: 10px;
-  gap: 4px;
+  border-radius: 14px;
+  gap: 3px;
+  border: none;
 }
 
 .toggle-btn {
   flex: 1;
-  padding: 8px 10px;
+  padding: 7px 10px;
   text-align: center;
-  font-size: 0.82rem;
-  font-weight: 600;
-  border-radius: 7px;
-  color: #475569;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: 10px;
+  color: #17171C;
+  opacity: 0.7;
   cursor: pointer;
   background: transparent;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
+}
+
+.toggle-btn:hover:not(.active) {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .toggle-btn.active {
   background: #ffffff;
-  color: var(--accent-orange);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  color: #17171C;
+  opacity: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Radio Card per Formati Layout */
+/* Radio Card di Layout */
 .layout-radio-card {
   display: flex;
   align-items: flex-start;
   gap: 10px;
   padding: 10px 12px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(6px);
+  border: none;
+  border-radius: 16px;
   margin-bottom: 8px;
   cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .layout-radio-card:hover {
-  background: #fffaf5;
-  border-color: var(--accent-orange-light);
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+}
+
+.layout-radio-card:has(input[type="radio"]:checked) {
+  background: #ffffff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
 }
 
 .layout-radio-card input[type="radio"] {
   margin-top: 3px;
-  accent-color: var(--accent-orange);
+  accent-color: var(--bg-dark);
 }
 
 .layout-radio-info {
@@ -267,249 +326,278 @@
 
 .layout-radio-title {
   display: block;
-  font-size: 0.86rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  color: #1e293b;
+  color: #17171C;
 }
 
 .layout-radio-desc {
   display: block;
-  font-size: 0.75rem;
-  color: #64748b;
+  font-size: 0.72rem;
+  color: #17171C;
+  opacity: 0.7;
   margin-top: 2px;
   line-height: 1.3;
 }
 
 /* ==========================================================================
-   SEZIONE 4: SCHEDE DELLE COLONNE
+   SCHEDE DELLE COLONNE
    ========================================================================== */
 .column-config-card {
-  background: #ffffff;
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+  border-radius: 18px;
   padding: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  border: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(234, 88, 12, 0.12);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: all 0.2s ease;
+}
+
+.column-config-card:hover {
+  background: #ffffff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .column-config-card.is-dragging {
-  opacity: 0.4;
+  opacity: 0.35;
 }
 
 .column-config-card.drag-target {
-  border: 2px dashed var(--accent-orange);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px var(--bg-dark);
 }
 
-/* Rigo 1: Nome a larghezza 100% con handle di trascinamento e tasto elimina */
 .col-card-top-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .drag-handle {
   cursor: grab;
-  color: #94a3b8;
-  font-size: 1.1rem;
-  user-select: none;
+  color: #17171C;
+  opacity: 0.5;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 2px 4px;
 }
 
 .col-name-input {
   flex: 1;
-  width: 100%; /* LARGHEZZA 100% COME RICHIESTO */
-  padding: 8px 10px;
-  font-size: 0.88rem;
-  font-weight: 600;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  color: #0f172a;
-}
-
-.col-name-input:focus {
-  border-color: var(--accent-orange);
+  width: 100%;
+  padding: 7px 10px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  color: #17171C;
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .btn-delete-col {
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  color: #94a3b8;
-  font-size: 0.85rem;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.05);
+  color: #17171C;
+  font-size: 0.72rem;
+  font-weight: 700;
   cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .btn-delete-col:hover {
-  background: #fee2e2;
-  color: #dc2626;
+  background: #ffe4e6;
+  color: #e11d48;
 }
 
-/* Rigo 2: Due tasti al 50% "Sfondo" e "Testo" */
+/* Pulsanti Scelta Colori Colonna (Sfondo e Testo) */
 .col-card-colors-row {
   display: flex;
-  gap: 8px;
-  margin-bottom: 10px;
+  gap: 6px;
+  margin-bottom: 8px;
 }
 
 .btn-color-trigger {
-  flex: 1; /* CIASCUNO AL 50% */
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 7px 10px;
-  background: #f8fafc;
-  border: 1px solid #cbd5e1;
-  border-radius: 7px;
+  gap: 7px;
+  padding: 8px 10px;
+  background: #ffffff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .btn-color-trigger:hover {
-  background: #ffffff;
-  border-color: var(--accent-orange);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
 .color-swatch-circle {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
   display: inline-block;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 
 .color-btn-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #334155;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #17171C;
 }
 
-/* Rigo 3: Selettore a quarti, badge frazione e riordinamento */
+/* Footer Colonna: Larghezza, Badge e Frecce */
 .col-card-footer-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  font-size: 0.78rem;
+  gap: 6px;
+  font-size: 0.74rem;
 }
 
 .col-width-selector-group {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
+  color: #17171C;
+  font-weight: 600;
+}
+
+.col-factor-select {
+  padding: 4px 6px;
+  font-size: 0.74rem;
 }
 
 .col-ratio-badge {
-  font-size: 0.74rem;
+  font-size: 0.70rem;
   font-weight: 700;
-  background: #f1f5f9;
-  color: #475569;
+  background: rgba(0, 0, 0, 0.06);
+  color: #17171C;
   padding: 3px 6px;
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
 .col-reorder-buttons {
   display: flex;
-  gap: 2px;
+  gap: 3px;
 }
 
 .btn-move-col {
-  padding: 3px 6px;
-  background: #f1f5f9;
-  border-radius: 4px;
-  font-size: 0.7rem;
-  color: #475569;
+  padding: 3px 7px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 6px;
+  color: #17171C;
+  font-size: 0.72rem;
+  font-weight: 700;
 }
 
 .btn-move-col:hover:not(:disabled) {
-  background: var(--accent-orange-light);
-  color: var(--text-orange-dark);
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .btn-move-col:disabled {
-  opacity: 0.3;
+  opacity: 0.25;
   cursor: not-allowed;
 }
 
-/* Tasto Aggiungi Colonna in fondo alla lista */
+/* Pulsante Aggiungi Colonna */
 .btn-add-column-bottom {
   width: 100%;
-  padding: 10px;
+  padding: 11px 16px;
   background: #ffffff;
-  border: 2px dashed rgba(234, 88, 12, 0.35);
-  border-radius: 9px;
-  font-size: 0.88rem;
+  border: none;
+  border-radius: 16px;
+  font-family: var(--font-heading);
+  font-size: 0.86rem;
   font-weight: 700;
-  color: var(--accent-orange);
+  color: #17171C;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   cursor: pointer;
-  transition: all 0.18s ease;
+  transition: all 0.2s ease;
   margin-top: 6px;
 }
 
 .btn-add-column-bottom:hover {
-  background: #fff7ed;
-  border-color: var(--accent-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Festività personalizzate */
+/* Festività Personalizzate */
 .custom-holidays-box {
-  background: #ffffff;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 12px;
+  border-radius: 18px;
+  border: none;
 }
 
 .custom-holiday-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 8px;
-  background: #f8fafc;
-  border-radius: 6px;
+  padding: 7px 10px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: none;
   margin-bottom: 6px;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 .holiday-date-badge {
-  font-weight: 700;
-  color: var(--holiday-red);
+  font-weight: 800;
+  color: #e11d48;
+  font-size: 0.76rem;
 }
 
 .holiday-name-text {
   flex: 1;
-  margin: 0 10px;
-  font-weight: 500;
-  color: #1e293b;
+  margin: 0 8px;
+  font-weight: 600;
+  color: #17171C;
 }
 
 .btn-remove-holiday {
-  color: #94a3b8;
-  padding: 2px 6px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.05);
+  color: #17171C;
+  font-size: 0.70rem;
+  font-weight: 700;
 }
 
 .btn-remove-holiday:hover {
-  color: #ef4444;
+  background: #ffe4e6;
+  color: #e11d48;
 }
 
-/* Sezione Privacy e GDPR in fondo */
+/* Privacy & Link Esterni */
 .privacy-link-row {
   margin-top: 14px;
   text-align: center;
 }
 
 .privacy-link {
-  font-size: 0.8rem;
-  color: #64748b;
+  font-size: 0.75rem;
+  color: #17171C;
+  opacity: 0.7;
   text-decoration: underline;
+  font-weight: 600;
 }
 
 .privacy-link:hover {
-  color: var(--accent-orange);
+  opacity: 1;
 }

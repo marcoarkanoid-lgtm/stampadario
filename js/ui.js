@@ -112,10 +112,10 @@ window.CalendarApp = window.CalendarApp || {};
 
       colCard.innerHTML = `
         <div class="col-card-top-row">
-          <div class="drag-handle" title="Trascina per riordinare">⠿</div>
+          <div class="drag-handle" title="Trascina per riordinare">:::</div>
           <input type="text" class="col-name-input" value="${App.sanitizeText(col.name, 30)}"
-                 placeholder="Nome Colonna (100% larghezza)" maxlength="30" data-idx="${idx}">
-          <button type="button" class="btn-delete-col" title="Elimina colonna" data-idx="${idx}">✕</button>
+                 placeholder="Nome Colonna" maxlength="30" data-idx="${idx}">
+          <button type="button" class="btn-delete-col" title="Elimina colonna" data-idx="${idx}">Elimina</button>
         </div>
 
         <div class="col-card-colors-row">
@@ -124,7 +124,7 @@ window.CalendarApp = window.CalendarApp || {};
             <span class="color-btn-label">Sfondo</span>
           </button>
           <button type="button" class="btn-color-trigger btn-text-trigger" data-idx="${idx}">
-            <span class="color-swatch-circle" style="background-color: ${col.textColor || '#000000'}; border: 1px solid #94a3b8;"></span>
+            <span class="color-swatch-circle" style="background-color: ${col.textColor || '#000000'}; border: 1px solid #cbd5e1;"></span>
             <span class="color-btn-label">Testo</span>
           </button>
         </div>
@@ -133,19 +133,19 @@ window.CalendarApp = window.CalendarApp || {};
           <div class="col-width-selector-group">
             <label>Larghezza:</label>
             <select class="col-factor-select form-control-sm" data-idx="${idx}">
-              <option value="0.5" ${col.factor === 0.5 ? 'selected' : ''}>0.5x (-1/2)</option>
-              <option value="0.75" ${col.factor === 0.75 ? 'selected' : ''}>0.75x (-1/4)</option>
-              <option value="1.0" ${col.factor === 1.0 ? 'selected' : ''}>1.0x (Normale)</option>
-              <option value="1.25" ${col.factor === 1.25 ? 'selected' : ''}>1.25x (+1/4)</option>
-              <option value="1.5" ${col.factor === 1.5 ? 'selected' : ''}>1.5x (+1/2)</option>
-              <option value="1.75" ${col.factor === 1.75 ? 'selected' : ''}>1.75x (+3/4)</option>
-              <option value="2.0" ${col.factor === 2.0 ? 'selected' : ''}>2.0x (Doppia)</option>
+              <option value="0.5" ${col.factor === 0.5 ? 'selected' : ''}>0.5x</option>
+              <option value="0.75" ${col.factor === 0.75 ? 'selected' : ''}>0.75x</option>
+              <option value="1.0" ${col.factor === 1.0 ? 'selected' : ''}>1.0x</option>
+              <option value="1.25" ${col.factor === 1.25 ? 'selected' : ''}>1.25x</option>
+              <option value="1.5" ${col.factor === 1.5 ? 'selected' : ''}>1.5x</option>
+              <option value="1.75" ${col.factor === 1.75 ? 'selected' : ''}>1.75x</option>
+              <option value="2.0" ${col.factor === 2.0 ? 'selected' : ''}>2.0x</option>
             </select>
           </div>
           <span class="col-ratio-badge" title="Frazione e percentuale di spazio">${q}/${totalQuarters} (${pct}%)</span>
           <div class="col-reorder-buttons">
-            <button type="button" class="btn-move-col" data-dir="up" data-idx="${idx}" ${idx === 0 ? 'disabled' : ''} title="Sposta a sinistra/su">▲</button>
-            <button type="button" class="btn-move-col" data-dir="down" data-idx="${idx}" ${idx === App.state.columns.length - 1 ? 'disabled' : ''} title="Sposta a destra/giù">▼</button>
+            <button type="button" class="btn-move-col" data-dir="up" data-idx="${idx}" ${idx === 0 ? 'disabled' : ''} title="Sposta su">Su</button>
+            <button type="button" class="btn-move-col" data-dir="down" data-idx="${idx}" ${idx === App.state.columns.length - 1 ? 'disabled' : ''} title="Sposta giù">Giù</button>
           </div>
         </div>
       `;
@@ -251,11 +251,11 @@ window.CalendarApp = window.CalendarApp || {};
 
     if (isMax) {
       addColBtn.disabled = true;
-      addColBtn.innerHTML = `<span>⚠️ Limite massimo di 36 colonne raggiunto</span>`;
-      addColBtn.style.opacity = '0.55';
+      addColBtn.innerHTML = `<span>Limite massimo di 36 colonne raggiunto</span>`;
+      addColBtn.style.opacity = '0.5';
       addColBtn.style.cursor = 'not-allowed';
     } else {
-      addColBtn.innerHTML = `<span>➕ Aggiungi Nuova Colonna (${App.state.columns.length}/${App.MAX_COLUMNS || 36})</span>`;
+      addColBtn.innerHTML = `<span>+ Aggiungi Colonna (${App.state.columns.length}/${App.MAX_COLUMNS || 36})</span>`;
       addColBtn.addEventListener('click', () => {
         if (App.state.columns.length >= (App.MAX_COLUMNS || 36)) return;
         const newNum = App.state.columns.length + 1;
@@ -481,7 +481,7 @@ window.CalendarApp = window.CalendarApp || {};
       item.innerHTML = `
         <span class="holiday-date-badge">${h.day} ${App.MONTH_NAMES[h.month].substring(0, 3)}</span>
         <span class="holiday-name-text">${App.sanitizeText(h.name, 35)}</span>
-        <button type="button" class="btn-remove-holiday" data-idx="${idx}" title="Rimuovi">✕</button>
+        <button type="button" class="btn-remove-holiday" data-idx="${idx}" title="Rimuovi">Elimina</button>
       `;
 
       item.querySelector('.btn-remove-holiday').addEventListener('click', () => {
