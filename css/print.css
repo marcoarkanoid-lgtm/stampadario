@@ -67,6 +67,7 @@
     display: flex !important;
     flex-direction: column !important;
     box-sizing: border-box !important;
+    overflow: hidden !important;
   }
 
   .page-break-after {
@@ -83,7 +84,7 @@
     width: 210mm !important;
     height: 296mm !important;
     max-height: 296mm !important;
-    padding: 6mm 7mm 5mm 7mm !important;
+    padding: 5mm 6mm 4mm 6mm !important;
   }
 
   /* A4 Orizzontale (297 x 210 mm) - Perfetto per Bisettimanale e Quindicinale */
@@ -91,7 +92,7 @@
     width: 297mm !important;
     height: 209mm !important;
     max-height: 209mm !important;
-    padding: 6mm 8mm 5mm 8mm !important;
+    padding: 5mm 6mm 4mm 6mm !important;
   }
 
   /* A3 Verticale (297 x 420 mm) */
@@ -99,7 +100,7 @@
     width: 297mm !important;
     height: 419mm !important;
     max-height: 419mm !important;
-    padding: 8mm 9mm 6mm 9mm !important;
+    padding: 6mm 7mm 5mm 7mm !important;
   }
 
   /* A3 Orizzontale (420 x 297 mm) */
@@ -107,7 +108,7 @@
     width: 420mm !important;
     height: 296mm !important;
     max-height: 296mm !important;
-    padding: 8mm 10mm 6mm 10mm !important;
+    padding: 6mm 7mm 5mm 7mm !important;
   }
 
   /* La griglia si espande verticalmente per occupare l'intero spazio rimanente del foglio */
@@ -115,20 +116,62 @@
     flex: 1 !important;
     height: 100% !important;
     min-height: 0 !important;
-    border-right: none !important;
+    border: none !important;
+    overflow: hidden !important;
   }
 
   .calendar-grid {
     height: 100% !important;
     width: 100% !important;
+    min-height: 0 !important;
   }
 
-  /* Garanzia di visibilità dei separatori bianchi in stampa */
-  .grid-cell.is-sunday {
-    border-bottom: 4.5px solid #ffffff !important;
+  .grid-cell {
+    min-height: 0 !important;
+    overflow: hidden !important;
   }
 
-  .headers-white-separator .grid-cell-col-header {
-    border-bottom: 4.5px solid #ffffff !important;
+  .is-last-row-cell {
+    border-bottom: none !important;
+  }
+
+  .is-last-col-cell {
+    border-right: none !important;
+  }
+
+  .grid-cell-corner-empty {
+    border-top: none !important;
+    border-left: none !important;
+  }
+
+  /* Garanzia di visibilità dei separatori bianchi in stampa con densità scalata */
+  .density-spacious .grid-cell.is-sunday {
+    border-bottom: 5px solid #ffffff !important;
+  }
+  .density-normal .grid-cell.is-sunday {
+    border-bottom: 4px solid #ffffff !important;
+  }
+  .density-compact .grid-cell.is-sunday {
+    border-bottom: 3px solid #ffffff !important;
+  }
+  .density-ultra-compact .grid-cell.is-sunday {
+    border-bottom: 2px solid #ffffff !important;
+  }
+
+  .density-spacious.headers-white-separator .grid-cell-col-header,
+  .density-spacious .headers-white-separator .grid-cell-col-header {
+    border-bottom: 5px solid #ffffff !important;
+  }
+  .density-normal.headers-white-separator .grid-cell-col-header,
+  .density-normal .headers-white-separator .grid-cell-col-header {
+    border-bottom: 4px solid #ffffff !important;
+  }
+  .density-compact.headers-white-separator .grid-cell-col-header,
+  .density-compact .headers-white-separator .grid-cell-col-header {
+    border-bottom: 3px solid #ffffff !important;
+  }
+  .density-ultra-compact.headers-white-separator .grid-cell-col-header,
+  .density-ultra-compact .headers-white-separator .grid-cell-col-header {
+    border-bottom: 2px solid #ffffff !important;
   }
 }

@@ -489,26 +489,42 @@
 
 .col-reorder-buttons {
   display: flex;
-  gap: 3px;
+  gap: 4px;
+  align-items: center;
 }
 
-.btn-move-col {
-  padding: 3px 7px;
-  background: rgba(0, 0, 0, 0.06);
-  border-radius: 6px;
+.col-reorder-buttons .btn-move-col {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  border-radius: 7px;
   color: #17171C;
   font-size: 0.72rem;
   font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
-.btn-move-col:hover:not(:disabled) {
+.col-reorder-buttons .btn-move-col svg {
+  display: block;
+}
+
+.col-reorder-buttons .btn-move-col:hover:not(:disabled) {
   background: #ffffff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  color: #0f172a;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
 }
 
-.btn-move-col:disabled {
+.col-reorder-buttons .btn-move-col:disabled {
   opacity: 0.25;
   cursor: not-allowed;
+  transform: none;
 }
 
 /* Pulsante Aggiungi Colonna */

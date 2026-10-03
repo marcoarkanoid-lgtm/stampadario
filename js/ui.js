@@ -144,8 +144,12 @@ window.CalendarApp = window.CalendarApp || {};
           </div>
           <span class="col-ratio-badge" title="Frazione e percentuale di spazio">${q}/${totalQuarters} (${pct}%)</span>
           <div class="col-reorder-buttons">
-            <button type="button" class="btn-move-col" data-dir="up" data-idx="${idx}" ${idx === 0 ? 'disabled' : ''} title="Sposta su">Su</button>
-            <button type="button" class="btn-move-col" data-dir="down" data-idx="${idx}" ${idx === App.state.columns.length - 1 ? 'disabled' : ''} title="Sposta giù">Giù</button>
+            <button type="button" class="btn-move-col" data-dir="up" data-idx="${idx}" ${idx === 0 ? 'disabled' : ''} title="Sposta colonna su">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
+            </button>
+            <button type="button" class="btn-move-col" data-dir="down" data-idx="${idx}" ${idx === App.state.columns.length - 1 ? 'disabled' : ''} title="Sposta colonna giù">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
           </div>
         </div>
       `;

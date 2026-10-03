@@ -215,15 +215,35 @@ window.CalendarApp = window.CalendarApp || {};
       totalRows++;
     });
 
+    // Calcolo dinamico della densità per garantire il perfetto riempimento dello spazio al 100% senza strabordare
+    const isLandscape = App.state.layoutMode.startsWith('landscape');
+    const isA3 = (App.state.paperSize === 'A3');
+    const netGridHeight = isA3 ? (isLandscape ? 1040 : 1480) : (isLandscape ? 710 : 1030);
+    const avgRowHeight = netGridHeight / totalRows;
+
+    let densityClass = 'density-normal';
+    if (avgRowHeight >= 42) {
+      densityClass = 'density-spacious';
+    } else if (avgRowHeight >= 30) {
+      densityClass = 'density-normal';
+    } else if (avgRowHeight >= 23) {
+      densityClass = 'density-compact';
+    } else {
+      densityClass = 'density-ultra-compact';
+    }
+
+    sheetContainer.classList.remove('density-spacious', 'density-normal', 'density-compact', 'density-ultra-compact');
+    sheetContainer.classList.add(densityClass);
+
     // Spazio bianco di 4.5px sotto l'intestazione se NON ripetute ogni settimana
     const whiteSepClass = (!App.state.repeatHeaders) ? 'headers-white-separator' : '';
 
     sheetContainer.innerHTML = `
       ${headerHtml}
-      <div class="calendar-grid-container border-v-${App.state.verticalBorders} ${whiteSepClass}">
+      <div class="calendar-grid-container border-v-${App.state.verticalBorders} ${whiteSepClass} ${densityClass}">
         <div class="calendar-grid" style="
           grid-template-columns: ${gridColsTemplate};
-          grid-template-rows: auto repeat(${daysArray.length + (totalRows - daysArray.length - 1)}, 1fr);
+          grid-template-rows: auto repeat(${totalRows - 1}, minmax(0, 1fr));
         ">
           ${gridCellsHtml}
         </div>

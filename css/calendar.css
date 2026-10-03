@@ -60,28 +60,28 @@
 .print-sheet.size-a4-portrait {
   width: 794px;
   height: 1123px;
-  padding: 24px 22px 20px 22px;
+  padding: 20px 20px 16px 20px;
 }
 
 /* A4 Orizzontale (297 x 210 mm) */
 .print-sheet.size-a4-landscape {
   width: 1123px;
   height: 794px;
-  padding: 22px 24px 18px 24px;
+  padding: 16px 20px 14px 20px;
 }
 
 /* A3 Verticale (297 x 420 mm) */
 .print-sheet.size-a3-portrait {
   width: 1123px;
   height: 1587px;
-  padding: 32px 30px 26px 30px;
+  padding: 28px 28px 22px 28px;
 }
 
 /* A3 Orizzontale (420 x 297 mm) */
 .print-sheet.size-a3-landscape {
   width: 1587px;
   height: 1123px;
-  padding: 28px 32px 24px 32px;
+  padding: 24px 28px 18px 28px;
 }
 
 /* ==========================================================================
@@ -191,20 +191,20 @@
    ========================================================================== */
 .calendar-grid-container {
   flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   width: 100%;
-  border-left: 1px solid #cbd5e1;
-  border-top: 1px solid #cbd5e1;
-  border-bottom: 1px solid #cbd5e1;
-  border-right: none !important; /* BORDO ESTERNO DI DESTRA RIGOROSAMENTE RIMOSSO */
+  border: none !important; /* RIMOZIONE TOTALE DEI BORDI ESTERNI PERIMETRALI DEL CALENDARIO */
   background: #ffffff;
+  overflow: hidden;
 }
 
 .calendar-grid {
   display: grid;
   width: 100%;
   height: 100%;
+  min-height: 0;
   background: transparent;
 }
 
@@ -215,51 +215,47 @@
   position: relative;
   display: flex;
   box-sizing: border-box;
+  min-height: 0;
+  overflow: hidden;
   border-bottom: 1px solid #cbd5e1;
   border-right: 1px solid #cbd5e1;
 }
 
-/* --- OPZIONE 2: SOLO TRA COLONNE CONTENUTI (TUTTI E 4 I BORDI ESTERNI SPARISCONO) --- */
-.border-v-columns-only {
-  border: none !important; /* Rimuove i 4 bordi perimetrali esterni del contenitore */
+/* RIMOZIONE DEL BORDO ESTERNO INFERIORE DELL'ULTIMA RIGA IN TUTTE LE MODALITÀ */
+.is-last-row-cell {
+  border-bottom: none !important;
 }
+
+/* RIMOZIONE DEL BORDO ESTERNO DESTRO DELL'ULTIMA COLONNA IN TUTTE LE MODALITÀ */
+.is-last-col-cell {
+  border-right: none !important;
+}
+
+/* --- OPZIONE 2: SOLO TRA COLONNE CONTENUTI --- */
 .border-v-columns-only .grid-cell-date,
 .border-v-columns-only .grid-cell-corner-empty,
 .border-v-columns-only .grid-cell-repeat-header-corner {
-  border-right: none !important; /* Nessun bordo verticale sulla data */
-}
-.border-v-columns-only .grid-cell-col-header,
-.border-v-columns-only .grid-cell-repeat-header-col,
-.border-v-columns-only .grid-cell-data {
-  border-right: 1px solid #cbd5e1; /* Bordo verticale unicamente tra le colonne contenuti */
-}
-.border-v-columns-only .is-last-col-cell {
-  border-right: none !important; /* Nessun bordo perimetrale destro */
-}
-.border-v-columns-only .is-last-row-cell {
-  border-bottom: none !important; /* Nessun bordo perimetrale inferiore */
+  border-right: none !important; /* Nessun bordo verticale sulla colonna data */
 }
 
-/* --- OPZIONE 3: NESSUN BORDO VERTICALE (TUTTI E 4 I BORDI ESTERNI SPARISCONO) --- */
-.border-v-none {
-  border: none !important; /* Rimuove i 4 bordi perimetrali esterni del contenitore */
-}
+/* --- OPZIONE 3: NESSUN BORDO VERTICALE --- */
 .border-v-none .grid-cell {
   border-right: none !important; /* Nessun bordo verticale tra le celle */
 }
-.border-v-none .is-last-row-cell {
-  border-bottom: none !important; /* Nessun bordo perimetrale inferiore */
-}
 
-/* 1. PRIMA CELLA IN ALTO A SINISTRA (ANGOLO DATA): NESSUNA FORMATTAZIONE, BORDI O SFONDO */
+/* 1. PRIMA CELLA IN ALTO A SINISTRA (ANGOLO DATA): NESSUN BORDO ESTERNO */
 .grid-cell-corner-empty {
   background: transparent !important;
+  border-top: none !important;
+  border-left: none !important;
   border-bottom: 1px solid #cbd5e1 !important;
   border-right: 1px solid #cbd5e1 !important;
 }
 
 .grid-cell-repeat-header-corner {
   background: #f1f5f9;
+  border-top: none !important;
+  border-left: none !important;
   border-bottom: 1px solid #cbd5e1;
   border-right: 1px solid #cbd5e1;
 }
@@ -268,13 +264,14 @@
 .grid-cell-col-header, .grid-cell-repeat-header-col {
   align-items: center;
   justify-content: center;
-  padding: 8px 6px;
+  padding: 6px 4px;
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   text-align: center;
   cursor: pointer;
   user-select: none;
-  min-height: 38px;
+  min-height: 30px;
+  border-top: none !important;
 }
 
 .col-header-text {
@@ -282,12 +279,12 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
-/* Spazio bianco di 4.5px sotto l'intestazione se NON ripetute ogni settimana */
+/* Spazio bianco sotto l'intestazione se NON ripetute ogni settimana */
 .headers-white-separator .grid-cell-col-header {
-  border-bottom: 4.5px solid #ffffff !important;
+  border-bottom: 4px solid #ffffff !important;
 }
 
 /* 3. CELLA DATA (Giorno abbreviato + Numero) */
@@ -297,19 +294,20 @@
   justify-content: center;
   padding: 1px 2px;
   text-align: center;
+  border-left: none !important;
   border-right: 1px solid #cbd5e1;
 }
 
 .date-day-name {
-  font-size: 0.65rem;
+  font-size: 0.64rem;
   font-weight: 600;
-  text-transform: lowercase; /* MINUSCOLO E COMPATTO COME RICHIESTO */
+  text-transform: lowercase;
   color: #475569;
-  line-height: 1;
+  line-height: 1.05;
 }
 
 .date-day-num {
-  font-size: 1.05rem; /* NUMERO PIÙ GRANDE COME RICHIESTO */
+  font-size: 1.05rem;
   font-weight: 700;
   color: #0f172a;
   line-height: 1.1;
@@ -323,12 +321,148 @@
 
 /* 4. SEPARATORE BIANCO DOPO LA DOMENICA */
 .grid-cell.is-sunday {
-  border-bottom: 4.5px solid #ffffff !important; /* FASCIA BIANCA DI SEPARAZIONE */
+  border-bottom: 4px solid #ffffff !important;
 }
 
-/* 6. CELLE CONTENUTI */
+/* 5. CELLE CONTENUTI */
 .grid-cell-data {
   background-color: #ffffff;
+}
+
+/* ==========================================================================
+   SCALATURA DINAMICA DELLA DENSITÀ DELLE RIGHE (AUTO-FIT 100%)
+   ========================================================================== */
+
+/* 1. DENSITÀ SPAZIOSA (avgRowHeight >= 42px - es. Bisettimanali e Quindicinali) */
+.density-spacious .grid-cell-col-header,
+.density-spacious .grid-cell-repeat-header-col {
+  min-height: 38px;
+  padding: 8px 6px;
+  font-size: 0.90rem;
+}
+.density-spacious .date-day-name {
+  font-size: 0.70rem;
+  line-height: 1.1;
+}
+.density-spacious .date-day-num {
+  font-size: 1.22rem;
+  line-height: 1.1;
+}
+.density-spacious .grid-cell-date {
+  padding: 2px 2px;
+}
+.density-spacious .grid-cell.is-sunday {
+  border-bottom: 5px solid #ffffff !important;
+}
+.density-spacious.headers-white-separator .grid-cell-col-header,
+.density-spacious .headers-white-separator .grid-cell-col-header {
+  border-bottom: 5px solid #ffffff !important;
+}
+
+/* 2. DENSITÀ NORMALE (avgRowHeight 30-41px - es. Mese Singolo 28-31 giorni) */
+.density-normal .grid-cell-col-header,
+.density-normal .grid-cell-repeat-header-col {
+  min-height: 32px;
+  padding: 6px 4px;
+  font-size: 0.85rem;
+}
+.density-normal .date-day-name {
+  font-size: 0.63rem;
+  line-height: 1.05;
+}
+.density-normal .date-day-num {
+  font-size: 1.05rem;
+  line-height: 1.1;
+}
+.density-normal .grid-cell-date {
+  padding: 1px 2px;
+}
+.density-normal .grid-cell.is-sunday {
+  border-bottom: 4px solid #ffffff !important;
+}
+.density-normal.headers-white-separator .grid-cell-col-header,
+.density-normal .headers-white-separator .grid-cell-col-header {
+  border-bottom: 4px solid #ffffff !important;
+}
+
+/* 3. DENSITÀ COMPATTA (avgRowHeight 23-29px - es. 31 giorni + ripetizione testate / 35-37 giorni) */
+.density-compact .sheet-header {
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+}
+.density-compact .sheet-calendar-name,
+.density-compact .sheet-month-name {
+  font-size: 1.2rem;
+}
+.density-compact .grid-cell-col-header,
+.density-compact .grid-cell-repeat-header-col {
+  min-height: 24px;
+  padding: 3px 2px;
+  font-size: 0.78rem;
+}
+.density-compact .col-header-text {
+  line-height: 1.1;
+}
+.density-compact .date-day-name {
+  font-size: 0.54rem;
+  line-height: 1.0;
+}
+.density-compact .date-day-num {
+  font-size: 0.88rem;
+  line-height: 1.0;
+}
+.density-compact .grid-cell-date {
+  padding: 0 1px;
+}
+.density-compact .grid-cell.is-sunday {
+  border-bottom: 3px solid #ffffff !important;
+}
+.density-compact.headers-white-separator .grid-cell-col-header,
+.density-compact .headers-white-separator .grid-cell-col-header {
+  border-bottom: 3px solid #ffffff !important;
+}
+
+/* 4. DENSITÀ ULTRA-COMPATTA (avgRowHeight < 23px - es. Mese Orizzontale Singolo o Verticale Estesa 42 giorni) */
+.density-ultra-compact .sheet-header {
+  margin-bottom: 5px;
+  padding-bottom: 3px;
+}
+.density-ultra-compact .sheet-calendar-name,
+.density-ultra-compact .sheet-month-name {
+  font-size: 1.1rem;
+}
+.density-ultra-compact .sheet-subtitle-badge {
+  font-size: 0.65rem;
+  margin-top: 1px;
+}
+.density-ultra-compact .grid-cell-col-header,
+.density-ultra-compact .grid-cell-repeat-header-col {
+  min-height: 18px;
+  padding: 1px 1px;
+  font-size: 0.70rem;
+}
+.density-ultra-compact .col-header-text {
+  -webkit-line-clamp: 1;
+  font-size: 0.70rem;
+  line-height: 1;
+}
+.density-ultra-compact .date-day-name {
+  font-size: 0.48rem;
+  line-height: 0.95;
+}
+.density-ultra-compact .date-day-num {
+  font-size: 0.75rem;
+  line-height: 0.95;
+}
+.density-ultra-compact .grid-cell-date {
+  padding: 0;
+}
+.density-ultra-compact .grid-cell.is-sunday {
+  border-bottom: 2px solid #ffffff !important;
+}
+.density-ultra-compact.headers-white-separator .grid-cell-col-header,
+.density-ultra-compact .headers-white-separator .grid-cell-col-header {
+  border-bottom: 2px solid #ffffff !important;
 }
 
 /* ==========================================================================
