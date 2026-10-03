@@ -28,8 +28,8 @@
   --bg-card: #ffffff;
   
   /* Canvas di anteprima coordinato */
-  --bg-viewport: #E5E5EB;
-  --bg-viewport-gradient: radial-gradient(circle at 50% 25%, #F4F4F6 0%, #D8D8E0 100%);
+  --bg-viewport: #577b22;
+  --bg-viewport-gradient: radial-gradient(circle at 60% 15%, #B7F25D 0%, #111 100%);
 
   /* Ombra Realistica del Foglio Stampabile */
   --sheet-shadow: 
