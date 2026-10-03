@@ -143,21 +143,47 @@ input, select, textarea {
     min-width: 100% !important;
     max-width: 100% !important;
     height: auto !important;
+    overflow: visible !important;
   }
 
+  /* Su mobile il tasto stampa in alto viene rimosso: l'utente configura e usa 'Anteprima' in fondo */
+  .quick-action-box {
+    display: none !important;
+  }
+
+  /* Tasto Anteprima posizionato in fondo alle opzioni */
+  .mobile-action-box {
+    display: block !important;
+    margin-top: 24px;
+    margin-bottom: 30px;
+    padding: 0 4px;
+  }
+
+  .mobile-action-box .btn-primary-print {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.22);
+    border-radius: 18px;
+    letter-spacing: 0.2px;
+  }
+
+  /* L'anteprima del calendario è rigorosamente nascosta di default su mobile */
   .preview-viewport {
-    display: none;
+    display: none !important;
     width: 100%;
     min-height: 100vh;
-    padding: 20px 10px 80px 10px;
+    padding: 70px 10px 100px 10px;
   }
 
+  /* Quando l'utente clicca su Anteprima, la sidebar scompare e compare l'anteprima */
   body.mobile-preview-active .control-sidebar {
-    display: none;
+    display: none !important;
   }
 
   body.mobile-preview-active .preview-viewport {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     align-items: center;
   }

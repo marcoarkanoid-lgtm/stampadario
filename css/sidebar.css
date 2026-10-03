@@ -97,6 +97,11 @@
   font-weight: 500;
 }
 
+/* Box Azione Mobile (nascosto su desktop) */
+.mobile-action-box {
+  display: none;
+}
+
 /* Area Scorrevole delle Impostazioni */
 .sidebar-scrollable-content {
   flex: 1;

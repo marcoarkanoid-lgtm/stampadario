@@ -157,7 +157,9 @@ window.CalendarApp = window.CalendarApp || {};
     dom.btnConfirmFolderHelp = document.getElementById('btnConfirmFolderHelp');
 
     // Mobile controls
-    dom.btnMobileTogglePreview = document.getElementById('btnMobileTogglePreview');
+    dom.btnMobilePreview = document.getElementById('btnMobilePreview');
+    dom.btnMobileBack = document.getElementById('btnMobileBackToControls');
+    dom.btnMobilePrint = document.getElementById('btnMobilePrint');
 
     // 2. Ripristino stato salvato o impostazioni predefinite
     App.loadStateFromLocalStorage();
@@ -502,14 +504,26 @@ window.CalendarApp = window.CalendarApp || {};
     }
 
     // --- MOBILE CONTROLS ---
-    if (dom.btnMobileTogglePreview) {
-      dom.btnMobileTogglePreview.addEventListener('click', () => {
-        document.body.classList.toggle('mobile-preview-active');
-        const isActive = document.body.classList.contains('mobile-preview-active');
-        dom.btnMobileTogglePreview.querySelector('.btn-label').textContent = isActive ? 'Torna alla Console' : 'Mostra Anteprima / Stampa';
-        if (isActive) {
+    if (dom.btnMobilePreview) {
+      dom.btnMobilePreview.addEventListener('click', () => {
+        document.body.classList.add('mobile-preview-active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(() => {
           App.fitZoomToScreen();
-        }
+        }, 100);
+      });
+    }
+
+    if (dom.btnMobileBack) {
+      dom.btnMobileBack.addEventListener('click', () => {
+        document.body.classList.remove('mobile-preview-active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    if (dom.btnMobilePrint) {
+      dom.btnMobilePrint.addEventListener('click', () => {
+        window.print();
       });
     }
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stampadario - Planning & Stampa ad Alta Risoluzione</title>
+  <title>Stampadario - Stampa il tuo calendario</title>
 
   <!-- Google Fonts: Plus Jakarta Sans e Quicksand -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,7 @@
       <div class="app-title-group">
         <div class="app-header-texts">
           <h1>Stampadario</h1>
-          <p>Planning & Stampa ad Alta Risoluzione</p>
+          <p>Stampa il tuo calendario</p>
         </div>
       </div>
     </header>
@@ -39,7 +39,6 @@
       <button type="button" class="btn-primary-print" id="btnPrint">
         <span>Stampa / Salva PDF</span>
       </button>
-      <p class="print-sub-info" id="printScopeHint">Margini consigliati nel browser: "Nessuno"</p>
     </div>
 
     <!-- Contenitore a scorrimento verticale con schede a colori senza bordi -->
@@ -414,6 +413,13 @@
         </div>
       </details>
 
+      <!-- Tasto Azione Mobile in fondo alla console (Sostituisce il tasto stampa in alto su mobile) -->
+      <div class="mobile-action-box no-print">
+        <button type="button" class="btn-primary-print btn-mobile-preview-trigger" id="btnMobilePreview">
+          <span>Anteprima</span>
+        </button>
+      </div>
+
     </div>
   </aside>
 
@@ -460,11 +466,14 @@
   </main>
 
   <!-- ========================================================================
-       BARRA INFERIORE PER DISPOSITIVI MOBILI
+       BARRA INFERIORE PER DISPOSITIVI MOBILI (ATTIVA SOLO IN FASE DI ANTEPRIMA)
        ======================================================================== -->
-  <div class="mobile-controls-bar no-print">
-    <button type="button" class="btn-mobile-toggle" id="btnMobileTogglePreview">
-      <span class="btn-label">Mostra Anteprima / Stampa</span>
+  <div class="mobile-preview-toolbar no-print" id="mobilePreviewToolbar">
+    <button type="button" class="btn-mobile-toolbar-back" id="btnMobileBackToControls">
+      <span>← Modifica</span>
+    </button>
+    <button type="button" class="btn-primary-print btn-mobile-toolbar-print" id="btnMobilePrint">
+      <span>Stampa / Salva PDF</span>
     </button>
   </div>
 

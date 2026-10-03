@@ -460,6 +460,9 @@ window.CalendarApp = window.CalendarApp || {};
    * Funzione di utilità per aprire ed evidenziare una specifica sezione della console
    */
   App.focusSection = function (sectionId) {
+    if (document.body.classList.contains('mobile-preview-active')) {
+      document.body.classList.remove('mobile-preview-active');
+    }
     const sec = document.getElementById(sectionId);
     if (sec) {
       sec.open = true;
