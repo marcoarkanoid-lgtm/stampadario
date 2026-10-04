@@ -174,4 +174,48 @@
   .density-ultra-compact .headers-white-separator .grid-cell-col-header {
     border-bottom: 2px solid #ffffff !important;
   }
+
+  /* ========================================================================
+     REGOLE IMPERATIVE PERMANENTI:
+     - NESSUNA RIGA TRA INTESTAZIONE E TABELLA DEL MESE
+     - NESSUN BORDO ESTERNO SULLA TABELLA DEL MESE
+     ======================================================================== */
+  .sheet-header {
+    border-bottom: none !important;
+  }
+
+  .calendar-grid-container,
+  .calendar-grid {
+    border: none !important;
+  }
+
+  .calendar-grid-container .grid-cell-corner-empty {
+    border: none !important;
+  }
+
+  .calendar-grid-container .grid-cell-col-header,
+  .calendar-grid-container [class*="density-"] .grid-cell-col-header {
+    border-top: none !important;
+  }
+
+  .calendar-grid-container .grid-cell-corner-empty,
+  .calendar-grid-container .grid-cell-repeat-header-corner,
+  .calendar-grid-container .grid-cell-date,
+  .calendar-grid-container [class*="density-"] .grid-cell-date {
+    border-left: none !important;
+  }
+
+  .calendar-grid-container .is-last-col-cell,
+  .calendar-grid-container .grid-cell.is-last-col-cell,
+  .calendar-grid-container [class*="density-"] .grid-cell.is-last-col-cell {
+    border-right: none !important;
+  }
+
+  .calendar-grid-container .is-last-row-cell,
+  .calendar-grid-container .grid-cell.is-last-row-cell,
+  .calendar-grid-container .grid-cell.is-sunday.is-last-row-cell,
+  .calendar-grid-container [class*="density-"] .grid-cell.is-last-row-cell,
+  .calendar-grid-container [class*="density-"] .grid-cell.is-sunday.is-last-row-cell {
+    border-bottom: none !important;
+  }
 }

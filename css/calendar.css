@@ -93,7 +93,7 @@
   align-items: flex-end;
   margin-bottom: 12px;
   padding-bottom: 6px;
-  border-bottom: 2px solid currentColor;
+  border-bottom: none !important;
   width: 100%;
 }
 
@@ -243,13 +243,10 @@
   border-right: none !important; /* Nessun bordo verticale tra le celle */
 }
 
-/* 1. PRIMA CELLA IN ALTO A SINISTRA (ANGOLO DATA): NESSUN BORDO ESTERNO */
+/* 1. PRIMA CELLA IN ALTO A SINISTRA (ANGOLO DATA): NESSUN BORDO */
 .grid-cell-corner-empty {
   background: transparent !important;
-  border-top: none !important;
-  border-left: none !important;
-  border-bottom: 1px solid #cbd5e1 !important;
-  border-right: 1px solid #cbd5e1 !important;
+  border: none !important;
 }
 
 .grid-cell-repeat-header-corner {
@@ -483,4 +480,50 @@
 .theme-monochrome .grid-cell-date.is-holiday .date-day-num {
   color: #000000 !important;
   font-weight: 800;
+}
+
+/* ==========================================================================
+   REGOLE IMPERATIVE PERMANENTI:
+   - NESSUNA RIGA TRA INTESTAZIONE E TABELLA DEL MESE
+   - NESSUN BORDO ESTERNO SULLA TABELLA DEL MESE
+   ========================================================================== */
+.sheet-header {
+  border-bottom: none !important;
+}
+
+.calendar-grid-container,
+.calendar-grid {
+  border: none !important;
+  outline: none !important;
+}
+
+/* 1. Nessun bordo superiore sulla prima riga */
+.calendar-grid-container .grid-cell-corner-empty,
+.calendar-grid-container .grid-cell-col-header,
+.calendar-grid-container [class*="density-"] .grid-cell-col-header {
+  border-top: none !important;
+}
+
+/* 2. Nessun bordo sinistro sulla prima colonna */
+.calendar-grid-container .grid-cell-corner-empty,
+.calendar-grid-container .grid-cell-repeat-header-corner,
+.calendar-grid-container .grid-cell-date,
+.calendar-grid-container [class*="density-"] .grid-cell-date {
+  border-left: none !important;
+}
+
+/* 3. Nessun bordo destro sull'ultima colonna */
+.calendar-grid-container .is-last-col-cell,
+.calendar-grid-container .grid-cell.is-last-col-cell,
+.calendar-grid-container [class*="density-"] .grid-cell.is-last-col-cell {
+  border-right: none !important;
+}
+
+/* 4. Nessun bordo inferiore sull'ultima riga (nemmeno se domenica o in qualsiasi densità) */
+.calendar-grid-container .is-last-row-cell,
+.calendar-grid-container .grid-cell.is-last-row-cell,
+.calendar-grid-container .grid-cell.is-sunday.is-last-row-cell,
+.calendar-grid-container [class*="density-"] .grid-cell.is-last-row-cell,
+.calendar-grid-container [class*="density-"] .grid-cell.is-sunday.is-last-row-cell {
+  border-bottom: none !important;
 }
