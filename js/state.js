@@ -50,7 +50,8 @@ window.CalendarApp = window.CalendarApp || {};
 
     // 5. Grafica, Bordi e Modalità Cromatica
     colorMode: 'color',                    // 'color', 'striped-color', 'striped-gray', 'gray-body', 'monochrome'
-    verticalBorders: 'all',                // 'all', 'columns-only', 'none'
+    verticalBorders: 'columns-only',       // 'columns-only', 'none'
+    tableBorders: false,                   // true: mostra bordi perimetrali esterni della tabella; false: nessun bordo esterno
     repeatHeaders: false,                  // Ripetizione prima del Lunedì
 
     // 6. Festività Personalizzate (max 5)
@@ -182,6 +183,10 @@ window.CalendarApp = window.CalendarApp || {};
         if (parsed && typeof parsed === 'object') {
           // Applica i dati memorizzati aggiornando lo stato
           Object.assign(App.state, parsed);
+          if (App.state.verticalBorders === 'all') {
+            App.state.verticalBorders = 'columns-only';
+          }
+          App.state.tableBorders = Boolean(App.state.tableBorders);
           // Verifica integrità colonne
           if (!Array.isArray(App.state.columns) || App.state.columns.length === 0) {
             App.state.columns = JSON.parse(JSON.stringify(defaultState.columns));
@@ -331,8 +336,13 @@ window.CalendarApp = window.CalendarApp || {};
       if (['color', 'striped-color', 'striped-gray', 'gray-body', 'monochrome'].includes(incomingState.colorMode)) {
         App.state.colorMode = incomingState.colorMode;
       }
-      if (['all', 'columns-only', 'none'].includes(incomingState.verticalBorders)) {
+      if (incomingState.verticalBorders === 'all') {
+        App.state.verticalBorders = 'columns-only';
+      } else if (['columns-only', 'none'].includes(incomingState.verticalBorders)) {
         App.state.verticalBorders = incomingState.verticalBorders;
+      }
+      if (incomingState.tableBorders !== undefined) {
+        App.state.tableBorders = Boolean(incomingState.tableBorders);
       }
       if (incomingState.repeatHeaders !== undefined) {
         App.state.repeatHeaders = Boolean(incomingState.repeatHeaders);

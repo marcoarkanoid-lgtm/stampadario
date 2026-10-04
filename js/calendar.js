@@ -237,10 +237,11 @@ window.CalendarApp = window.CalendarApp || {};
 
     // Spazio bianco di 4.5px sotto l'intestazione se NON ripetute ogni settimana
     const whiteSepClass = (!App.state.repeatHeaders) ? 'headers-white-separator' : '';
+    const tableBordersClass = App.state.tableBorders ? 'has-table-borders' : 'no-table-borders';
 
     sheetContainer.innerHTML = `
       ${headerHtml}
-      <div class="calendar-grid-container border-v-${App.state.verticalBorders} ${whiteSepClass} ${densityClass}">
+      <div class="calendar-grid-container border-v-${App.state.verticalBorders} ${tableBordersClass} ${whiteSepClass} ${densityClass}">
         <div class="calendar-grid" style="
           grid-template-columns: ${gridColsTemplate};
           grid-template-rows: auto repeat(${totalRows - 1}, minmax(0, 1fr));

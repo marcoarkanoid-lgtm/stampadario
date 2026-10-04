@@ -72,6 +72,7 @@ window.CalendarApp = window.CalendarApp || {};
     // 5. Grafica & Temi Cromatici
     if (dom.selectColorMode) dom.selectColorMode.value = App.state.colorMode;
     if (dom.selectVerticalBorders) dom.selectVerticalBorders.value = App.state.verticalBorders;
+    if (dom.checkTableBorders) dom.checkTableBorders.checked = Boolean(App.state.tableBorders);
     if (dom.checkRepeatHeaders) dom.checkRepeatHeaders.checked = App.state.repeatHeaders;
   };
 
@@ -121,6 +122,7 @@ window.CalendarApp = window.CalendarApp || {};
     // Sezione 6: Grafica e Bordi
     dom.selectColorMode = document.getElementById('selectColorMode');
     dom.selectVerticalBorders = document.getElementById('selectVerticalBorders');
+    dom.checkTableBorders = document.getElementById('checkTableBorders');
     dom.checkRepeatHeaders = document.getElementById('checkRepeatHeaders');
 
     // Sezione 6: Festività Utente
@@ -337,6 +339,14 @@ window.CalendarApp = window.CalendarApp || {};
       App.renderAllCalendarSheets();
       App.saveStateToLocalStorage();
     });
+
+    if (dom.checkTableBorders) {
+      dom.checkTableBorders.addEventListener('change', (e) => {
+        App.state.tableBorders = e.target.checked;
+        App.renderAllCalendarSheets();
+        App.saveStateToLocalStorage();
+      });
+    }
 
     dom.checkRepeatHeaders.addEventListener('change', (e) => {
       App.state.repeatHeaders = e.target.checked;

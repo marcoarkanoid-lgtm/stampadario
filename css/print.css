@@ -116,8 +116,16 @@
     flex: 1 !important;
     height: 100% !important;
     min-height: 0 !important;
-    border: none !important;
     overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .calendar-grid-container.no-table-borders {
+    border: none !important;
+  }
+
+  .calendar-grid-container.has-table-borders {
+    border: 1px solid #cbd5e1 !important;
   }
 
   .calendar-grid {

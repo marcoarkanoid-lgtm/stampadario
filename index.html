@@ -315,10 +315,16 @@
           <div class="form-group">
             <label class="form-label" for="selectVerticalBorders">Bordi Verticali Colonne</label>
             <select id="selectVerticalBorders" class="form-select">
-              <option value="all">Completi (tutte le celle)</option>
-              <option value="columns-only">Solo tra colonne contenuti (senza bordi esterni)</option>
+              <option value="columns-only">Solo tra colonne contenuti</option>
               <option value="none">Nessun bordo verticale</option>
             </select>
+          </div>
+
+          <div class="form-group" style="margin-top: 10px;">
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 0.80rem; cursor: pointer; color: #17171C; font-weight: 600;">
+              <input type="checkbox" id="checkTableBorders" style="accent-color: var(--bg-dark); width: 16px; height: 16px;">
+              <span>Bordi tabella</span>
+            </label>
           </div>
 
           <div class="form-group" style="margin-top: 10px;">

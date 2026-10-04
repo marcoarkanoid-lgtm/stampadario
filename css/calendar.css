@@ -195,9 +195,9 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  border: none !important; /* RIMOZIONE TOTALE DEI BORDI ESTERNI PERIMETRALI DEL CALENDARIO */
   background: #ffffff;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .calendar-grid {
@@ -483,20 +483,28 @@
 }
 
 /* ==========================================================================
-   REGOLE IMPERATIVE PERMANENTI:
+   REGOLA IMPERATIVA PERMANENTE:
    - NESSUNA RIGA TRA INTESTAZIONE E TABELLA DEL MESE
-   - NESSUN BORDO ESTERNO SULLA TABELLA DEL MESE
    ========================================================================== */
 .sheet-header {
   border-bottom: none !important;
 }
 
-.calendar-grid-container,
-.calendar-grid {
+/* ==========================================================================
+   BORDI PERIMETRALI ESTERNI DELLA TABELLA (OPZIONE "BORDI TABELLA")
+   ========================================================================== */
+.calendar-grid-container.no-table-borders,
+.calendar-grid-container.no-table-borders .calendar-grid {
   border: none !important;
   outline: none !important;
 }
 
+.calendar-grid-container.has-table-borders {
+  border: 1px solid #cbd5e1 !important;
+  box-sizing: border-box;
+}
+
+/* In entrambe le modalità, le celle perimetrali non aggiungono bordi duplicati */
 /* 1. Nessun bordo superiore sulla prima riga */
 .calendar-grid-container .grid-cell-corner-empty,
 .calendar-grid-container .grid-cell-col-header,
@@ -519,7 +527,7 @@
   border-right: none !important;
 }
 
-/* 4. Nessun bordo inferiore sull'ultima riga (nemmeno se domenica o in qualsiasi densità) */
+/* 4. Nessun bordo inferiore sull'ultima riga */
 .calendar-grid-container .is-last-row-cell,
 .calendar-grid-container .grid-cell.is-last-row-cell,
 .calendar-grid-container .grid-cell.is-sunday.is-last-row-cell,
