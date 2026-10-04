@@ -51,6 +51,7 @@ window.CalendarApp = window.CalendarApp || {};
     const rawTitle = (App.state.calendarTitle || '').trim();
     const calendarName = rawTitle ? App.sanitizeText(rawTitle, 60) : '';
     const fontObj = App.FONT_CATALOG.find(f => f.id === App.state.headerFont);
+    const fontFamily = fontObj ? fontObj.family : "'Comfortaa', cursive, sans-serif";
     const isMonochrome = (App.state.colorMode === 'monochrome');
     const headerColor = isMonochrome ? '#111111' : (App.state.headerColor || '#111111');
 
