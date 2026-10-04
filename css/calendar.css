@@ -231,22 +231,20 @@
   border-right: none !important;
 }
 
-/* --- OPZIONE 2: SOLO TRA COLONNE CONTENUTI --- */
-.border-v-columns-only .grid-cell-date,
-.border-v-columns-only .grid-cell-corner-empty,
-.border-v-columns-only .grid-cell-repeat-header-corner {
-  border-right: none !important; /* Nessun bordo verticale sulla colonna data */
+/* --- OPZIONE: NESSUN BORDO VERTICALE TRA LE COLONNE CONTENUTI --- */
+.border-v-none .grid-cell-col-header,
+.border-v-none .grid-cell-repeat-header-col,
+.border-v-none .grid-cell-data {
+  border-right: none !important; /* Nessun divisorio tra le colonne contenuti */
 }
 
-/* --- OPZIONE 3: NESSUN BORDO VERTICALE --- */
-.border-v-none .grid-cell {
-  border-right: none !important; /* Nessun bordo verticale tra le celle */
-}
-
-/* 1. PRIMA CELLA IN ALTO A SINISTRA (ANGOLO DATA): NESSUN BORDO */
+/* 1. PRIMA CELLA IN ALTO A SINISTRA (ANGOLO DATA): BORDO DESTRO DI DIVISIONE DALLA PRIMA COLONNA */
 .grid-cell-corner-empty {
   background: transparent !important;
-  border: none !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-bottom: none !important;
+  border-right: 1px solid #cbd5e1 !important;
 }
 
 .grid-cell-repeat-header-corner {
@@ -254,7 +252,7 @@
   border-top: none !important;
   border-left: none !important;
   border-bottom: 1px solid #cbd5e1;
-  border-right: 1px solid #cbd5e1;
+  border-right: 1px solid #cbd5e1 !important;
 }
 
 /* 2. CELLE INTESTAZIONE COLONNE (IN CIMA AL CALENDARIO) */

@@ -295,6 +295,12 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+.btn-row-style-toggle {
+  padding: 7px 4px;
+  font-size: 0.72rem;
+  line-height: 1.2;
+}
+
 /* Radio Card di Layout */
 .layout-radio-card {
   display: flex;

@@ -301,15 +301,23 @@
           </div>
         </summary>
         <div class="section-content">
+          <!-- Scelta Binaria (come dimensione carta): Colori / Bianco e Nero -->
           <div class="form-group">
-            <label class="form-label" for="selectColorMode">Stile Cromatico</label>
-            <select id="selectColorMode" class="form-select">
-              <option value="color">A Colori (Predefinito con tinte pastello)</option>
-              <option value="striped-color">Righe Alternate a Colori (Chiara / Scura)</option>
-              <option value="striped-gray">Righe Alternate in Grigio (Ultra-chiaro per penna)</option>
-              <option value="gray-body">Corpo Grigio Neutro (Intestazioni a colori)</option>
-              <option value="monochrome">Bianco e Nero (Laser b/n & fotocopie economiche)</option>
-            </select>
+            <label class="form-label">Modalità Cromatiche</label>
+            <div class="toggle-btn-group">
+              <button type="button" class="toggle-btn btn-color-mode-toggle active" data-color-mode="color">Colori</button>
+              <button type="button" class="toggle-btn btn-color-mode-toggle" data-color-mode="monochrome">Bianco e Nero</button>
+            </div>
+          </div>
+
+          <!-- Scelta a Tre (come periodo di stampa): Righe Alternate / Evidenzia Finesettimana / Neutro -->
+          <div class="form-group">
+            <label class="form-label">Sfondo Righe & Evidenziazione</label>
+            <div class="toggle-btn-group">
+              <button type="button" class="toggle-btn btn-row-style-toggle" data-row-style="striped">Righe Alternate</button>
+              <button type="button" class="toggle-btn btn-row-style-toggle active" data-row-style="weekend">Evidenzia Finesettimana</button>
+              <button type="button" class="toggle-btn btn-row-style-toggle" data-row-style="neutral">Neutro</button>
+            </div>
           </div>
 
           <div class="form-group">

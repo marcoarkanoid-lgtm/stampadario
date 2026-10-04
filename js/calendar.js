@@ -51,8 +51,8 @@ window.CalendarApp = window.CalendarApp || {};
     const rawTitle = (App.state.calendarTitle || '').trim();
     const calendarName = rawTitle ? App.sanitizeText(rawTitle, 60) : '';
     const fontObj = App.FONT_CATALOG.find(f => f.id === App.state.headerFont);
-    const fontFamily = fontObj ? fontObj.family : "'Inter', sans-serif";
-    const headerColor = App.state.headerColor || '#111111';
+    const isMonochrome = (App.state.colorMode === 'monochrome');
+    const headerColor = isMonochrome ? '#111111' : (App.state.headerColor || '#111111');
 
     const titleAlign = App.state.titleAlignment || 'left';
     const centerMonth = Boolean(App.state.centerMonth);
@@ -234,6 +234,7 @@ window.CalendarApp = window.CalendarApp || {};
 
     sheetContainer.classList.remove('density-spacious', 'density-normal', 'density-compact', 'density-ultra-compact');
     sheetContainer.classList.add(densityClass);
+    sheetContainer.classList.toggle('theme-monochrome', App.state.colorMode === 'monochrome');
 
     // Spazio bianco di 4.5px sotto l'intestazione se NON ripetute ogni settimana
     const whiteSepClass = (!App.state.repeatHeaders) ? 'headers-white-separator' : '';

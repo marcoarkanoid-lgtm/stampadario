@@ -113,74 +113,65 @@ window.CalendarApp = window.CalendarApp || {};
   App.getCellBackgroundColor = function (colHex, dayOfWeek, isHoliday, rowIndex = 0) {
     const isSunday = (dayOfWeek === 0);
     const isSaturday = (dayOfWeek === 6);
-    const isRedDay = isSunday || isHoliday; // Se festivo, ha sempre priorità sul sabato
+    const isRedDay = isSunday || isHoliday; // Se festivo, ha sempre priorità sul sabato (sabati festivi come festivi)
     const isEvenRow = (rowIndex % 2 === 0);
+    const isMonochrome = (App.state.colorMode === 'monochrome');
+    const rowStyle = App.state.rowStyle || 'weekend';
 
-    // --- MODALITÀ I: RIGHE ALTERNATE A COLORI ---
-    // Le righe si alternano tra il colore feriale chiaro e quello del sabato più scuro.
-    // I festivi e i sabati si riconoscono per il colore del font nella colonna data.
-    if (App.state.colorMode === 'striped-color') {
-      const { r, g, b } = App.hexToRgb(colHex);
-      if (isEvenRow) {
-        // Riga chiara (tinta feriale 7% colore + 93% bianco)
-        const mixR = Math.round(r * 0.07 + 255 * 0.93);
-        const mixG = Math.round(g * 0.07 + 255 * 0.93);
-        const mixB = Math.round(b * 0.07 + 255 * 0.93);
-        return `rgb(${mixR}, ${mixG}, ${mixB})`;
+    // 1. NEUTRO: lascia tutti gli sfondi bianchi anche nella colonna della data ma lascia l'intestazione
+    if (rowStyle === 'neutral') {
+      return '#ffffff';
+    }
+
+    // 2. RIGHE ALTERNATE: alternarsi di righe chiare e scure
+    if (rowStyle === 'striped') {
+      if (isMonochrome) {
+        return isEvenRow ? '#ffffff' : '#f1f5f9';
       } else {
-        // Riga più scura (tinta sabato 14% colore + 86% bianco)
-        const mixR = Math.round(r * 0.14 + 255 * 0.86);
-        const mixG = Math.round(g * 0.14 + 255 * 0.86);
-        const mixB = Math.round(b * 0.14 + 255 * 0.86);
-        return `rgb(${mixR}, ${mixG}, ${mixB})`;
+        const { r, g, b } = App.hexToRgb(colHex);
+        if (isEvenRow) {
+          // Riga chiara (tinta 7% colore + 93% bianco)
+          const mixR = Math.round(r * 0.07 + 255 * 0.93);
+          const mixG = Math.round(g * 0.07 + 255 * 0.93);
+          const mixB = Math.round(b * 0.07 + 255 * 0.93);
+          return `rgb(${mixR}, ${mixG}, ${mixB})`;
+        } else {
+          // Riga scura (tinta 16% colore + 84% bianco)
+          const mixR = Math.round(r * 0.16 + 255 * 0.84);
+          const mixG = Math.round(g * 0.16 + 255 * 0.84);
+          const mixB = Math.round(b * 0.16 + 255 * 0.84);
+          return `rgb(${mixR}, ${mixG}, ${mixB})`;
+        }
       }
     }
 
-    // --- MODALITÀ II: RIGHE ALTERNATE IN GRIGIO ---
-    // Alternanza bianco e grigio ultra-chiaro desaturato, ideale per scrittura a penna
-    if (App.state.colorMode === 'striped-gray') {
-      if (isEvenRow) {
-        return '#ffffff'; // Bianco puro
-      } else {
-        return '#f1f5f9'; // Grigio Slate-100 ultra-chiaro (luminosità 96%)
-      }
-    }
-
-    // --- MODALITÀ III: CORPO GRIGIO NEUTRO (DESATURATO & LUMINOSO PER PENNA) ---
-    if (App.state.colorMode === 'gray-body') {
-      if (isRedDay) return '#e2e8f0';    // Grigio festivo tenue (Slate-200, 90% luminosità)
-      if (isSaturday) return '#f8fafc';  // Grigio sabato chiarissimo (Slate-50, 98% luminosità)
-      return '#ffffff';                  // Bianco lavorativo
-    }
-
-    // --- MODALITÀ IV: BIANCO E NERO (Laser monochrome / fotocopie) ---
-    if (App.state.colorMode === 'monochrome') {
-      if (isRedDay) return '#e2e8f0';    // Grigio festivo tenue
-      if (isSaturday) return '#f1f5f9';  // Grigio chiaro sabato
-      return '#ffffff';                  // Bianco puro per i giorni lavorativi
-    }
-
-    // --- MODALITÀ V: A COLORI CLASSICO (Predefinita con tinte pastello) ---
-    const { r, g, b } = App.hexToRgb(colHex);
-
-    if (isRedDay) {
-      // Domenica o festivo: miscela 22% colore + 78% bianco
-      const mixR = Math.round(r * 0.22 + 255 * 0.78);
-      const mixG = Math.round(g * 0.22 + 255 * 0.78);
-      const mixB = Math.round(b * 0.22 + 255 * 0.78);
-      return `rgb(${mixR}, ${mixG}, ${mixB})`;
-    } else if (isSaturday) {
-      // Sabato: miscela 14% colore + 86% bianco
-      const mixR = Math.round(r * 0.14 + 255 * 0.86);
-      const mixG = Math.round(g * 0.14 + 255 * 0.86);
-      const mixB = Math.round(b * 0.14 + 255 * 0.86);
-      return `rgb(${mixR}, ${mixG}, ${mixB})`;
+    // 3. EVIDENZIA IL FINESETTIMANA:
+    // sabato un po' piu scuro, domenica e festivi ancora un po' piu scuri, sabati festivi come festivi
+    if (isMonochrome) {
+      if (isRedDay) return '#e2e8f0';    // Domenica e festivi (inclusi sabati festivi)
+      if (isSaturday) return '#f1f5f9';  // Sabato non festivo
+      return '#ffffff';                  // Feriali
     } else {
-      // Giorni lavorativi (Lun - Ven): miscela 7% colore + 93% bianco (perfetto per scrittura a penna)
-      const mixR = Math.round(r * 0.07 + 255 * 0.93);
-      const mixG = Math.round(g * 0.07 + 255 * 0.93);
-      const mixB = Math.round(b * 0.07 + 255 * 0.93);
-      return `rgb(${mixR}, ${mixG}, ${mixB})`;
+      const { r, g, b } = App.hexToRgb(colHex);
+      if (isRedDay) {
+        // Domenica e festivi (inclusi sabati festivi): miscela 22% colore + 78% bianco
+        const mixR = Math.round(r * 0.22 + 255 * 0.78);
+        const mixG = Math.round(g * 0.22 + 255 * 0.78);
+        const mixB = Math.round(b * 0.22 + 255 * 0.78);
+        return `rgb(${mixR}, ${mixG}, ${mixB})`;
+      } else if (isSaturday) {
+        // Sabato non festivo: miscela 13% colore + 87% bianco (un po' più scuro)
+        const mixR = Math.round(r * 0.13 + 255 * 0.87);
+        const mixG = Math.round(g * 0.13 + 255 * 0.87);
+        const mixB = Math.round(b * 0.13 + 255 * 0.87);
+        return `rgb(${mixR}, ${mixG}, ${mixB})`;
+      } else {
+        // Feriali (Lun - Ven non festivi): miscela 6% colore + 94% bianco (chiaro per scrittura)
+        const mixR = Math.round(r * 0.06 + 255 * 0.94);
+        const mixG = Math.round(g * 0.06 + 255 * 0.94);
+        const mixB = Math.round(b * 0.06 + 255 * 0.94);
+        return `rgb(${mixR}, ${mixG}, ${mixB})`;
+      }
     }
   };
 
@@ -196,24 +187,32 @@ window.CalendarApp = window.CalendarApp || {};
     const isSaturday = (dayOfWeek === 6);
     const isRedDay = isSunday || isHoliday;
     const isEvenRow = (rowIndex % 2 === 0);
+    const isMonochrome = (App.state.colorMode === 'monochrome');
+    const rowStyle = App.state.rowStyle || 'weekend';
 
-    // Nelle modalità a righe alternate, la cella data segue l'alternanza
-    if (App.state.colorMode === 'striped-color' || App.state.colorMode === 'striped-gray') {
-      return isEvenRow ? '#ffffff' : '#f1f5f9';
-    }
-
-    if (App.state.colorMode === 'monochrome' || App.state.colorMode === 'gray-body') {
-      if (isRedDay) return '#e2e8f0';
-      if (isSaturday) return '#f8fafc';
+    // 1. NEUTRO: tutti gli sfondi bianchi anche nella colonna della data
+    if (rowStyle === 'neutral') {
       return '#ffffff';
     }
 
-    if (isRedDay) {
-      return 'rgba(211, 47, 47, 0.09)'; // Leggera sfumatura rossa trasparente
-    } else if (isSaturday) {
-      return 'rgba(211, 47, 47, 0.035)'; // Sfumatura sabato appena accennata
+    // 2. RIGHE ALTERNATE: la cella data segue l'alternanza
+    if (rowStyle === 'striped') {
+      return isEvenRow ? '#ffffff' : '#f1f5f9';
     }
-    return '#ffffff';
+
+    // 3. EVIDENZIA IL FINESETTIMANA:
+    if (isMonochrome) {
+      if (isRedDay) return '#e2e8f0';    // Festivi (inclusi sabati festivi)
+      if (isSaturday) return '#f8fafc';  // Sabato non festivo
+      return '#ffffff';                  // Feriali
+    } else {
+      if (isRedDay) {
+        return 'rgba(211, 47, 47, 0.09)'; // Festivi (inclusi sabati festivi)
+      } else if (isSaturday) {
+        return 'rgba(211, 47, 47, 0.035)'; // Sabato non festivo
+      }
+      return '#ffffff';
+    }
   };
 
   /**
@@ -231,6 +230,10 @@ window.CalendarApp = window.CalendarApp || {};
   App.getDateTextColor = function (dayOfWeek, isHoliday, isOutsideMonth = false, isExtendedLayout = false) {
     if (isExtendedLayout && isOutsideMonth) {
       return App.DATE_COLORS ? App.DATE_COLORS.outsideMonth : '#94a3b8';
+    }
+    const isMonochrome = (App.state.colorMode === 'monochrome');
+    if (isMonochrome) {
+      return '#0f172a';
     }
     const isSunday = (dayOfWeek === 0);
     const isSaturday = (dayOfWeek === 6);

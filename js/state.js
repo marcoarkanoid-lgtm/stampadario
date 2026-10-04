@@ -49,7 +49,8 @@ window.CalendarApp = window.CalendarApp || {};
     ],
 
     // 5. Grafica, Bordi e Modalità Cromatica
-    colorMode: 'color',                    // 'color', 'striped-color', 'striped-gray', 'gray-body', 'monochrome'
+    colorMode: 'color',                    // 'color' (A Colori), 'monochrome' (Bianco e Nero)
+    rowStyle: 'weekend',                   // 'striped' (Righe Alternate), 'weekend' (Evidenzia Finesettimana), 'neutral' (Neutro)
     verticalBorders: 'columns-only',       // 'columns-only', 'none'
     tableBorders: false,                   // true: mostra bordi perimetrali esterni della tabella; false: nessun bordo esterno
     repeatHeaders: false,                  // Ripetizione prima del Lunedì
@@ -183,6 +184,25 @@ window.CalendarApp = window.CalendarApp || {};
         if (parsed && typeof parsed === 'object') {
           // Applica i dati memorizzati aggiornando lo stato
           Object.assign(App.state, parsed);
+
+          // Migrazione e validazione colorMode ('color' o 'monochrome')
+          if (parsed.colorMode === 'monochrome' || parsed.colorMode === 'striped-gray') {
+            App.state.colorMode = 'monochrome';
+          } else {
+            App.state.colorMode = 'color';
+          }
+
+          // Migrazione e validazione rowStyle ('striped', 'weekend', 'neutral')
+          if (['striped', 'weekend', 'neutral'].includes(parsed.rowStyle)) {
+            App.state.rowStyle = parsed.rowStyle;
+          } else if (parsed.colorMode === 'striped-color' || parsed.colorMode === 'striped-gray') {
+            App.state.rowStyle = 'striped';
+          } else if (parsed.colorMode === 'gray-body') {
+            App.state.rowStyle = 'neutral';
+          } else {
+            App.state.rowStyle = 'weekend';
+          }
+
           if (App.state.verticalBorders === 'all') {
             App.state.verticalBorders = 'columns-only';
           }
@@ -333,8 +353,24 @@ window.CalendarApp = window.CalendarApp || {};
       if (['single', 'year', 'range'].includes(incomingState.periodMode)) {
         App.state.periodMode = incomingState.periodMode;
       }
-      if (['color', 'striped-color', 'striped-gray', 'gray-body', 'monochrome'].includes(incomingState.colorMode)) {
+      // Validazione e migrazione colorMode
+      if (['color', 'monochrome'].includes(incomingState.colorMode)) {
         App.state.colorMode = incomingState.colorMode;
+      } else if (incomingState.colorMode === 'striped-gray') {
+        App.state.colorMode = 'monochrome';
+      } else {
+        App.state.colorMode = 'color';
+      }
+
+      // Validazione e migrazione rowStyle
+      if (['striped', 'weekend', 'neutral'].includes(incomingState.rowStyle)) {
+        App.state.rowStyle = incomingState.rowStyle;
+      } else if (incomingState.colorMode === 'striped-color' || incomingState.colorMode === 'striped-gray') {
+        App.state.rowStyle = 'striped';
+      } else if (incomingState.colorMode === 'gray-body') {
+        App.state.rowStyle = 'neutral';
+      } else {
+        App.state.rowStyle = 'weekend';
       }
       if (incomingState.verticalBorders === 'all') {
         App.state.verticalBorders = 'columns-only';

@@ -70,7 +70,12 @@ window.CalendarApp = window.CalendarApp || {};
     if (dom.inputRangeEndYear) dom.inputRangeEndYear.value = App.state.rangeEndYear;
 
     // 5. Grafica & Temi Cromatici
-    if (dom.selectColorMode) dom.selectColorMode.value = App.state.colorMode;
+    document.querySelectorAll('.btn-color-mode-toggle').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.colorMode === App.state.colorMode);
+    });
+    document.querySelectorAll('.btn-row-style-toggle').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.rowStyle === (App.state.rowStyle || 'weekend'));
+    });
     if (dom.selectVerticalBorders) dom.selectVerticalBorders.value = App.state.verticalBorders;
     if (dom.checkTableBorders) dom.checkTableBorders.checked = Boolean(App.state.tableBorders);
     if (dom.checkRepeatHeaders) dom.checkRepeatHeaders.checked = App.state.repeatHeaders;
@@ -120,7 +125,6 @@ window.CalendarApp = window.CalendarApp || {};
     dom.inputRangeEndYear = document.getElementById('inputRangeEndYear');
 
     // Sezione 6: Grafica e Bordi
-    dom.selectColorMode = document.getElementById('selectColorMode');
     dom.selectVerticalBorders = document.getElementById('selectVerticalBorders');
     dom.checkTableBorders = document.getElementById('checkTableBorders');
     dom.checkRepeatHeaders = document.getElementById('checkRepeatHeaders');
@@ -327,11 +331,28 @@ window.CalendarApp = window.CalendarApp || {};
       });
     });
 
-    // --- SEZIONE 5: GRAFICA, BORDI & MODALITÀ CROMATICA ---
-    dom.selectColorMode.addEventListener('change', (e) => {
-      App.state.colorMode = e.target.value;
-      App.renderAllCalendarSheets();
-      App.saveStateToLocalStorage();
+    // --- SEZIONE 6: GRAFICA, BORDI & MODALITÀ CROMATICA ---
+    document.querySelectorAll('.btn-color-mode-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        App.state.colorMode = btn.dataset.colorMode;
+        document.querySelectorAll('.btn-color-mode-toggle').forEach(b => {
+          b.classList.toggle('active', b === btn);
+        });
+        App.renderAllCalendarSheets();
+        App.renderColumnConfigCards();
+        App.saveStateToLocalStorage();
+      });
+    });
+
+    document.querySelectorAll('.btn-row-style-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        App.state.rowStyle = btn.dataset.rowStyle;
+        document.querySelectorAll('.btn-row-style-toggle').forEach(b => {
+          b.classList.toggle('active', b === btn);
+        });
+        App.renderAllCalendarSheets();
+        App.saveStateToLocalStorage();
+      });
     });
 
     dom.selectVerticalBorders.addEventListener('change', (e) => {
