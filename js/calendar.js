@@ -47,7 +47,7 @@ window.CalendarApp = window.CalendarApp || {};
    * @param {string|null} subTitle - Eventuale dicitura del foglio (es. "Settimane 40 - 41")
    * @returns {string} Markup HTML dell'header del foglio
    */
-  App.buildSheetHeaderHtml = function (monthTitle, subTitle = null) {
+  App.buildSheetHeaderHtml = function (monthTitle) {
     const rawTitle = (App.state.calendarTitle || '').trim();
     const calendarName = rawTitle ? App.sanitizeText(rawTitle, 60) : '';
     const fontObj = App.FONT_CATALOG.find(f => f.id === App.state.headerFont);
@@ -65,7 +65,6 @@ window.CalendarApp = window.CalendarApp || {};
     const monthHtml = `
       <div class="sheet-month-wrap">
         <span class="sheet-month-name">${monthTitle}</span>
-        ${subTitle ? `<span class="sheet-subtitle-badge">${subTitle}</span>` : ''}
       </div>
     `;
 
@@ -200,7 +199,7 @@ window.CalendarApp = window.CalendarApp || {};
    */
   App.renderSheetWithDays = function (sheetContainer, monthTitle, subTitle, daysArray, allowWeeklyHeaders = true) {
     const gridColsTemplate = App.buildGridColumnsTemplate(App.state.layoutMode);
-    const headerHtml = App.buildSheetHeaderHtml(monthTitle, subTitle);
+    const headerHtml = App.buildSheetHeaderHtml(monthTitle);
 
     let gridCellsHtml = App.buildHeaderRowCellsHtml(false);
     let totalRows = 1; // 1 riga per l'intestazione principale
@@ -416,8 +415,7 @@ window.CalendarApp = window.CalendarApp || {};
         const sheetDiv = document.createElement('div');
         sheetDiv.className = `print-sheet ${sheetSizeClass} ${!isAbsoluteLastSheet ? 'page-break-after' : ''}`;
 
-        const subTitle = `Foglio ${sIdx + 1} di ${biSheets.length} (2 Settimane)`;
-        App.renderSheetWithDays(sheetDiv, sheetObj.title, subTitle, sheetObj.days, true);
+        App.renderSheetWithDays(sheetDiv, sheetObj.title, null, sheetObj.days, true);
         sheetsWrapper.appendChild(sheetDiv);
       });
 
@@ -496,7 +494,7 @@ window.CalendarApp = window.CalendarApp || {};
             isCustomHoliday: Boolean(hInfo && hInfo.isCustom)
           });
         }
-        App.renderSheetWithDays(sheet1, monthTitle, 'Giorni 1 - 15', days1to15, true);
+        App.renderSheetWithDays(sheet1, monthTitle, null, days1to15, true);
         sheetsWrapper.appendChild(sheet1);
 
         // Foglio 2 (16-fine)
@@ -514,7 +512,7 @@ window.CalendarApp = window.CalendarApp || {};
             isCustomHoliday: Boolean(hInfo && hInfo.isCustom)
           });
         }
-        App.renderSheetWithDays(sheet2, monthTitle, `Giorni 16 - ${daysInMonth}`, days16toEnd, true);
+        App.renderSheetWithDays(sheet2, monthTitle, null, days16toEnd, true);
         sheetsWrapper.appendChild(sheet2);
       }
       // --- CASO: FOGLIO SINGOLO MENSILE (Verticale Standard o Orizzontale Unico) ---

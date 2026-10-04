@@ -27,6 +27,7 @@
   .floating-island,
   .modal-overlay,
   .mobile-controls-bar,
+  .sheet-subtitle-badge,
   .no-print {
     display: none !important;
   }

@@ -17,3 +17,7 @@
 
 ## 4. LINEA DIVISORIA TRA COLONNA DATA E PRIMA COLONNA
 - Tra la colonna della data (incluso l'angolo in alto a sinistra `.grid-cell-corner-empty`) e la prima colonna di contenuti deve essere SEMPRE presente la riga/bordo verticale di divisione (`border-right: 1px solid #cbd5e1`).
+
+## 5. NESSUNA DICITURA O NUMERO DI PAGINA NELL'INTESTAZIONE DEI FOGLI
+- In tutte le impaginazioni (bisettimanale, quindicinale, verticale, orizzontale, ecc.), l'intestazione del foglio deve contenere ESCLUSIVAMENTE il nome del calendario e il mese/anno.
+- NON inserire mai diciture come "Foglio X di XX (2 Settimane)", "Giorni 1 - 15", numeri di pagina o altri sottotitoli/badge nella testata del foglio sia a schermo che in stampa.
